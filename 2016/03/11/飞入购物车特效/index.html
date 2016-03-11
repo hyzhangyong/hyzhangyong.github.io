@@ -4,17 +4,30 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Zack&#39;s Blog</title>
+  <title>jQuery购物车特效 | Zack&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zack's Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="最近开发一个平台，需要购物车，仿照网上一些素材制作了一个飞入购物车的特效。使用了以下脚本:
+
+1.jquery.min.js2.jquery.fly.min.js
+
+物品列表HTML代码:12345678&amp;lt;ul class=&quot;goodslist&quot;&amp;gt;	&amp;lt;li&amp;gt;    	&amp;lt;img src=&quot;url&quot; /&amp;gt;        &amp;lt;div class=&quot;inner&quot;&amp;g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery购物车特效">
+<meta property="og:url" content="http://yoursite.com/2016/03/11/飞入购物车特效/index.html">
 <meta property="og:site_name" content="Zack's Blog">
-<meta property="og:description">
+<meta property="og:description" content="最近开发一个平台，需要购物车，仿照网上一些素材制作了一个飞入购物车的特效。使用了以下脚本:
+
+1.jquery.min.js2.jquery.fly.min.js
+
+物品列表HTML代码:12345678&amp;lt;ul class=&quot;goodslist&quot;&amp;gt;	&amp;lt;li&amp;gt;    	&amp;lt;img src=&quot;url&quot; /&amp;gt;        &amp;lt;div class=&quot;inner&quot;&amp;g">
+<meta property="og:updated_time" content="2016-03-11T15:17:23.159Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zack's Blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="jQuery购物车特效">
+<meta name="twitter:description" content="最近开发一个平台，需要购物车，仿照网上一些素材制作了一个飞入购物车的特效。使用了以下脚本:
+
+1.jquery.min.js2.jquery.fly.min.js
+
+物品列表HTML代码:12345678&amp;lt;ul class=&quot;goodslist&quot;&amp;gt;	&amp;lt;li&amp;gt;    	&amp;lt;img src=&quot;url&quot; /&amp;gt;        &amp;lt;div class=&quot;inner&quot;&amp;g">
   
     <link rel="alternative" href="/atom.xml" title="Zack&#39;s Blog" type="application/atom+xml">
   
@@ -159,9 +172,7 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
-  
-    <article id="post-飞入购物车特效" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-飞入购物车特效" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/03/11/飞入购物车特效/" class="article-date">
@@ -177,12 +188,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/11/飞入购物车特效/">jQuery购物车特效</a>
+    <h1 class="article-title" itemprop="name">
+      jQuery购物车特效
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/购物车/">购物车</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -193,107 +215,75 @@
 </blockquote>
 <p>物品列表HTML代码:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"goodslist"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"url"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"inner"</span>&gt;</span></span><br><span class="line">        	<span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"addcar"</span> <span class="attr">herf</span>=<span class="string">"javascript:void(0)"</span>&gt;</span>加入购物车<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>购物车代码:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"car"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">herf</span>=<span class="string">"#"</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">i</span> <span class="attr">id</span>=<span class="string">"end"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">        购物车</span><br><span class="line">    <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/购物车/">购物车</a></li></ul>
-	</div>
+<a id="more"></a>
+<p>调用函数:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$(funciton()&#123;</span><br><span class="line">	<span class="keyword">var</span> offset=$(<span class="string">"#end"</span>).offset();</span><br><span class="line">    $(<span class="string">".addcar"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    	<span class="keyword">var</span> addcar=$(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">var</span> img=addcar.parents().find(<span class="string">'img'</span>).attr(<span class="string">'src'</span>);</span><br><span class="line">        <span class="keyword">var</span> flyer=$(<span class="string">'&lt;img class="u-flyer" src="'</span>+img+<span class="string">'"&gt;'</span>);</span><br><span class="line">        flyer.fly(&#123;</span><br><span class="line">        	start:&#123;</span><br><span class="line">            	left:event.pageX,</span><br><span class="line">                top:event.pageY</span><br><span class="line">            &#125;,</span><br><span class="line">            end:&#123;</span><br><span class="line">            left:offset.left,</span><br><span class="line">            top:offset.top,</span><br><span class="line">            width:<span class="number">0</span>,</span><br><span class="line">            height:<span class="number">0</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>飞入购物车图片样式<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.u-flyer</span>&#123;</span><br><span class="line">    <span class="attribute">display</span>:block;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">z-index</span>: <span class="number">9999</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/03/11/飞入购物车特效/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
     </div>
     
   </div>
   
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/09/Ubuntu下安装Hexo与搭建Blog/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Ubuntu下安装Hexo与搭建Blog</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
 </article>
 
 
-
-
-
-
-
-
-
-  
-    <article id="post-Ubuntu下安装Hexo与搭建Blog" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/09/Ubuntu下安装Hexo与搭建Blog/" class="article-date">
-  	<time datetime="2016-03-09T06:39:27.000Z" itemprop="datePublished">2016-03-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/09/Ubuntu下安装Hexo与搭建Blog/">Ubuntu下安装Hexo与搭建Blog</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言:"></a>前言:</h2><p>最近在github安了家，在很早之前就了解过可以利用Hexo+Github,建立静态博客。决定自己搭建一个。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote>
-<ul>
-<li>安装Node.js</li>
-<li>安装Git</li>
-<li>安装Hexo</li>
-</ul>
-</blockquote>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/03/09/Ubuntu下安装Hexo与搭建Blog/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
 
 
 
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="飞入购物车特效" data-title="jQuery购物车特效" data-url="http://yoursite.com/2016/03/11/飞入购物车特效/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"hyzhangyong"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
-  
-  
+
 </div>
       <footer id="footer">
   <div class="outer">
@@ -317,8 +307,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
