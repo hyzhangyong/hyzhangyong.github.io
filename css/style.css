@@ -924,6 +924,24 @@ a {
   margin: 4px 4px 0 -12px;
   color: #c8c8c8;
 }
+.article-hit {
+  width: auto;
+  font-size: 14px;
+  text-align: right;
+  margin-right: 150px;
+  position: absolute;
+  right: 0;
+  top: 23px;
+  text-align: center;
+  z-index: 1;
+  color: #aaa;
+}
+.article-hit:before {
+  color: #999;
+  content: "\f06e";
+  font: 17px FontAwesome;
+  margin-right: 5px;
+}
 .article-title {
   color: #696969;
   margin-left: 0px;
