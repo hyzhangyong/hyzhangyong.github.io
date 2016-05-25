@@ -82,7 +82,7 @@ var _hmt = _hmt || [];
 						<li>Tags</li>
 						
 						
-						<li>About</li>
+						<li>Über</li>
 						
 					</ul>
 				</div>
@@ -113,7 +113,7 @@ var _hmt = _hmt || [];
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/amf/" style="font-size: 10px;">amf</a> <a href="/tags/jQuery/" style="font-size: 10px;">jQuery</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/threading/" style="font-size: 10px;">threading</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/购物车/" style="font-size: 10px;">购物车</a>
+						<a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/amf/" style="font-size: 10px;">amf</a> <a href="/tags/jQuery/" style="font-size: 10px;">jQuery</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/projection/" style="font-size: 10px;">projection</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/threading/" style="font-size: 10px;">threading</a> <a href="/tags/vertical/" style="font-size: 10px;">vertical</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/购物车/" style="font-size: 10px;">购物车</a>
 					</div>
 				</section>
 				
@@ -172,6 +172,66 @@ var _hmt = _hmt || [];
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-vertical-projection-for-python-opencv" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/25/vertical-projection-for-python-opencv/" class="article-date">
+  	<time datetime="2016-05-25T13:59:01.000Z" itemprop="datePublished">2016-05-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/25/vertical-projection-for-python-opencv/">vertical projection for python-opencv</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="关于垂直投影法的python-opncv的实现方式"><a href="#关于垂直投影法的python-opncv的实现方式" class="headerlink" title="关于垂直投影法的python,opncv的实现方式"></a>关于垂直投影法的python,opncv的实现方式</h2><h4 id="关于垂直投影的具体介绍，就不多说，直接上代码"><a href="#关于垂直投影的具体介绍，就不多说，直接上代码" class="headerlink" title="关于垂直投影的具体介绍，就不多说，直接上代码"></a>关于垂直投影的具体介绍，就不多说，直接上代码</h4><p><img src="http://7xroxn.com1.z0.glb.clouddn.com/number.png" alt=""><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 灰度化读取图片</span></span><br><span class="line">image = cv2.imreade(<span class="string">'number.jpg'</span>,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将图片二值化</span></span><br><span class="line">retval, img = cv2.threshold(image,<span class="number">170</span>,<span class="number">255</span>,cv2.THRESH_BINAPY_INV)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个空白图片(img.shape[0]为height,img.shape[1]为width)</span></span><br><span class="line">paintx = np.zeros(img.shape,np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将新图像数组中的所有通道元素的值都设置为0</span></span><br><span class="line">cv2.cv.Zero(cv2.cv.fromarray(paintx))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建width长度都为0的数组</span></span><br><span class="line">w = [<span class="number">0</span>]*image.shape[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对每一行计算投影值</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(image.shape[<span class="number">1</span>]):</span><br><span class="line">	<span class="keyword">for</span> y <span class="keyword">in</span> range(image.shape[<span class="number">0</span>]):</span><br><span class="line">    	t = cv2.cv.Get2D(cv2.cv.fromarray(img),y,x)</span><br><span class="line">        <span class="keyword">if</span> t[<span class="number">0</span>] == <span class="number">0</span>:</span><br><span class="line">        	w[x] += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line"><span class="comment"># 绘制垂直投影图</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(image.shape[<span class="number">1</span>]):</span><br><span class="line">	<span class="keyword">for</span> y <span class="keyword">in</span> range(w[x]):</span><br><span class="line">    	<span class="comment"># 把为0的像素变成白</span></span><br><span class="line">        cv2.cv.Set2D(cv2.cv.fromarray(paintx),y,x(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">0</span>))</span><br><span class="line">        </span><br><span class="line"><span class="comment"># 显示图片</span></span><br><span class="line">cv2.imshow(<span class="string">'paintx'</span>,paintx)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://7xroxn.com1.z0.glb.clouddn.com/paintx.png" alt=""></p>
+<h4 id="另外把水平投影也一起写了"><a href="#另外把水平投影也一起写了" class="headerlink" title="另外把水平投影也一起写了"></a>另外把水平投影也一起写了</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">painty = np.zeros(img.shape,np.uint8)</span><br><span class="line">cv2.cv.Zero(cv2.cv.fromarray(painty))</span><br><span class="line">h = [<span class="number">0</span>]*image.shape[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> y <span class="keyword">in</span> range(image.shape[<span class="number">0</span>]):</span><br><span class="line">	<span class="keyword">for</span> x <span class="keyword">in</span> range(image.shape[<span class="number">1</span>]):</span><br><span class="line">    	s = cv2.cv.Get2D(cv2.cv.fromarray(img),y,x)</span><br><span class="line">        <span class="keyword">if</span> s[<span class="number">0</span>] == <span class="number">0</span>:</span><br><span class="line">        	h[y] += <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> y <span class="keyword">in</span> range(image.shape(<span class="number">0</span>)):</span><br><span class="line">	<span class="keyword">for</span> x <span class="keyword">in</span> range(h[y]):</span><br><span class="line">    	cv2.cv.Set2D(cv2.cv.fromarray(painty),y,x,(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">0</span>))</span><br><span class="line">cv2.imshow(<span class="string">'painty'</span>,painty)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xroxn.com1.z0.glb.clouddn.com/painty.png" alt=""></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/">opencv</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/projection/">projection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vertical/">vertical</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-amf-for-python" class="article article-type-post" itemscope itemprop="blogPost">
   
