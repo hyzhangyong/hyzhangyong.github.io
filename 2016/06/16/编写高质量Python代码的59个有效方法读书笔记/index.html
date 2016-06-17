@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>编写高质量Python代码的59个有效方法读书笔记 | Zack&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记录python一些建议技巧1、使用if a is not b,而非if not a is b。2、不用if len(somelist) == 0来检查空值，而用if not somelist来检查（它会假定:空值将自动评估为False）。3、检测是否为非空值时，用if somelist会默认把非空值判断为True4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编写高质量Python代码的59个有效方法读书笔记">
+<meta property="og:url" content="http://yoursite.com/2016/06/16/编写高质量Python代码的59个有效方法读书笔记/index.html">
+<meta property="og:site_name" content="Zack's Blog">
+<meta property="og:description" content="记录python一些建议技巧1、使用if a is not b,而非if not a is b。2、不用if len(somelist) == 0来检查空值，而用if not somelist来检查（它会假定:空值将自动评估为False）。3、检测是否为非空值时，用if somelist会默认把非空值判断为True4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。">
+<meta property="og:updated_time" content="2016-06-17T04:17:46.366Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编写高质量Python代码的59个有效方法读书笔记">
+<meta name="twitter:description" content="记录python一些建议技巧1、使用if a is not b,而非if not a is b。2、不用if len(somelist) == 0来检查空值，而用if not somelist来检查（它会假定:空值将自动评估为False）。3、检测是否为非空值时，用if somelist会默认把非空值判断为True4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。">
+  
+    <link rel="alternative" href="/atom.xml" title="Zack&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?db4db202f629c02dd0b99b10a7f3a7c5";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xroxn.com1.z0.glb.clouddn.com/1.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Zack</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/hyzhangyong" title="github">github</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/amf/" style="font-size: 10px;">amf</a> <a href="/tags/jQuery/" style="font-size: 10px;">jQuery</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/projection/" style="font-size: 10px;">projection</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/threading/" style="font-size: 10px;">threading</a> <a href="/tags/vertical/" style="font-size: 10px;">vertical</a> <a href="/tags/技巧/" style="font-size: 10px;">技巧</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/购物车/" style="font-size: 10px;">购物车</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">一个迷路的雄鹰，努力想找回自我。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Zack</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://7xroxn.com1.z0.glb.clouddn.com/1.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Zack</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/hyzhangyong" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-编写高质量Python代码的59个有效方法读书笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/16/编写高质量Python代码的59个有效方法读书笔记/" class="article-date">
+  	<time datetime="2016-06-16T15:20:35.000Z" itemprop="datePublished">2016-06-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      编写高质量Python代码的59个有效方法读书笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技巧/">技巧</a></li></ul>
+	</div>
+
+        
+
+	
+        <div class="article-hit">
+        <span id="busuanzi_container_page_pv">
+         阅读<span id="busuanzi_value_page_pv"></span>次</span>
+        </div>
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="记录python一些建议技巧"><a href="#记录python一些建议技巧" class="headerlink" title="记录python一些建议技巧"></a>记录python一些建议技巧</h4><h6 id="1、使用if-a-is-not-b-而非if-not-a-is-b。"><a href="#1、使用if-a-is-not-b-而非if-not-a-is-b。" class="headerlink" title="1、使用if a is not b,而非if not a is b。"></a>1、使用<code>if a is not b</code>,而非<code>if not a is b</code>。</h6><h6 id="2、不用if-len-somelist-0来检查空值，而用if-not-somelist来检查（它会假定-空值将自动评估为False）。"><a href="#2、不用if-len-somelist-0来检查空值，而用if-not-somelist来检查（它会假定-空值将自动评估为False）。" class="headerlink" title="2、不用if len(somelist) == 0来检查空值，而用if not somelist来检查（它会假定:空值将自动评估为False）。"></a>2、不用<code>if len(somelist) == 0</code>来检查空值，而用<code>if not somelist</code>来检查（它会假定:空值将自动评估为False）。</h6><h6 id="3、检测是否为非空值时，用if-somelist会默认把非空值判断为True"><a href="#3、检测是否为非空值时，用if-somelist会默认把非空值判断为True" class="headerlink" title="3、检测是否为非空值时，用if somelist会默认把非空值判断为True"></a>3、检测是否为非空值时，用<code>if somelist</code>会默认把非空值判断为True</h6><h6 id="4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。例如，引入bar包中的foo模块时，应该完整写出from-bar-import-foo。如果一定要用相对名称来编写import语句，那就采用明确的写法-from-import-foo。import语句按顺序分三部分，分别代表标准库模块、第三方模块及自用模块，在每一部分中，各import语句应该按模块的字母顺序来排序。"><a href="#4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。例如，引入bar包中的foo模块时，应该完整写出from-bar-import-foo。如果一定要用相对名称来编写import语句，那就采用明确的写法-from-import-foo。import语句按顺序分三部分，分别代表标准库模块、第三方模块及自用模块，在每一部分中，各import语句应该按模块的字母顺序来排序。" class="headerlink" title="4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。例如，引入bar包中的foo模块时，应该完整写出from bar import foo。如果一定要用相对名称来编写import语句，那就采用明确的写法:from.import foo。import语句按顺序分三部分，分别代表标准库模块、第三方模块及自用模块，在每一部分中，各import语句应该按模块的字母顺序来排序。"></a>4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。例如，引入bar包中的foo模块时，应该完整写出<code>from bar import foo</code>。如果一定要用相对名称来编写import语句，那就采用明确的写法:<code>from.import foo</code>。import语句按顺序分三部分，分别代表标准库模块、第三方模块及自用模块，在每一部分中，各import语句应该按模块的字母顺序来排序。</h6><a id="more"></a>
+<h6 id="5、实现接受str或unicode-并总返回unicode"><a href="#5、实现接受str或unicode-并总返回unicode" class="headerlink" title="5、实现接受str或unicode,并总返回unicode:"></a>5、实现接受str或unicode,并总返回unicode:</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">to_unicode</span><span class="params">(unicode_or_str)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> isinstance(unicode_or_str,str):</span><br><span class="line">    	value = unicode_or_str.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">    	value = unicode_or_str</span><br><span class="line">    <span class="keyword">return</span> value</span><br></pre></td></tr></table></figure>
+<h6 id="6、实现接受str或unicode-并总返回str"><a href="#6、实现接受str或unicode-并总返回str" class="headerlink" title="6、实现接受str或unicode,并总返回str"></a>6、实现接受str或unicode,并总返回str</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">to_str</span><span class="params">(unicode_or_str)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> isinstance(unicode_or_str,unicode):</span><br><span class="line">    	value = unicode_or_str.encode(<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">    	value = unicode_or_str</span><br><span class="line">    <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+<h6 id="7、用列表推导来取代map和fileter"><a href="#7、用列表推导来取代map和fileter" class="headerlink" title="7、用列表推导来取代map和fileter"></a>7、用列表推导来取代map和fileter</h6><h6 id="8、合并pdf"><a href="#8、合并pdf" class="headerlink" title="8、合并pdf"></a>8、合并pdf</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> PyPDF2 <span class="keyword">import</span> PdfFileReader,PdfFileMerger</span><br><span class="line">files_dir = <span class="string">'e:\\pdf'</span></span><br><span class="line">pdf_files = [f <span class="keyword">for</span> f <span class="keyword">in</span> os.listdir(files_dir) <span class="keyword">if</span> f.endswith(<span class="string">'pdf'</span>)]</span><br><span class="line">merger = PdfFileMerger()</span><br><span class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> pdf_files:</span><br><span class="line">	merger.appedn(PdfFileReader(os.path.join(file_dir,filename),<span class="string">'rb'</span>))</span><br><span class="line">merger.writer(os.path.join(files_dir,<span class="string">'merged_full.pdf'</span>))</span><br></pre></td></tr></table></figure>
+<h6 id="9、文件排序（os-listdir不按照特定顺序排序）"><a href="#9、文件排序（os-listdir不按照特定顺序排序）" class="headerlink" title="9、文件排序（os.listdir不按照特定顺序排序）"></a>9、文件排序（os.listdir不按照特定顺序排序）</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">files = os.listdir(<span class="string">'.'</span>)</span><br><span class="line"><span class="comment"># [:-4]=.后缀</span></span><br><span class="line">files.sort(key = <span class="keyword">lambda</span> x:int(x[:<span class="number">-4</span>]))</span><br></pre></td></tr></table></figure>
+<h6 id="10、shutil-rmtree删除中文目录提示错误处理方式"><a href="#10、shutil-rmtree删除中文目录提示错误处理方式" class="headerlink" title="10、shutil.rmtree删除中文目录提示错误处理方式"></a>10、shutil.rmtree删除中文目录提示错误处理方式</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line">shutil.rmtree(<span class="string">ur'E:\XX\中文目录)</span><br><span class="line"># 在路径前面加u代表对字符串进行unicode编码</span></span><br></pre></td></tr></table></figure>
+<h6 id="11、自动补0"><a href="#11、自动补0" class="headerlink" title="11、自动补0"></a>11、自动补0</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="string">'123'</span></span><br><span class="line">s = n.zfill(<span class="number">5</span>)</span><br><span class="line"><span class="keyword">print</span> s</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"><span class="string">'00123'</span></span><br><span class="line"></span><br><span class="line">n = <span class="string">'-123'</span></span><br><span class="line">s = n.zfill(<span class="number">5</span>)</span><br><span class="line"><span class="keyword">print</span> s</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"><span class="string">'-0123'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 对于纯数字，可以通过格式化的方式来补0</span></span><br><span class="line">n = <span class="number">123</span></span><br><span class="line">s = <span class="string">'%05d'</span> % n</span><br><span class="line"><span class="keyword">print</span> s</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line"><span class="string">'00123'</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/25/vertical-projection-for-python-opencv/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vertical projection for python-opencv</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="编写高质量Python代码的59个有效方法读书笔记" data-title="编写高质量Python代码的59个有效方法读书笔记" data-url="http://yoursite.com/2016/06/16/编写高质量Python代码的59个有效方法读书笔记/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"hyzhangyong"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Zack
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+</footer>
+
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
