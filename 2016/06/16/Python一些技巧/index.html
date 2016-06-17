@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>编写高质量Python代码的59个有效方法读书笔记 | Zack&#39;s Blog</title>
+  <title>Python一些技巧 | Zack&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录python一些建议技巧1、使用if a is not b,而非if not a is b。2、不用if len(somelist) == 0来检查空值，而用if not somelist来检查（它会假定:空值将自动评估为False）。3、检测是否为非空值时，用if somelist会默认把非空值判断为True4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。">
+  <meta name="description" content="记录python一些技巧1、使用if a is not b,而非if not a is b。2、不用if len(somelist) == 0来检查空值，而用if not somelist来检查（它会假定:空值将自动评估为False）。3、检测是否为非空值时，用if somelist会默认把非空值判断为True4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。例如">
 <meta property="og:type" content="article">
-<meta property="og:title" content="编写高质量Python代码的59个有效方法读书笔记">
-<meta property="og:url" content="http://yoursite.com/2016/06/16/编写高质量Python代码的59个有效方法读书笔记/index.html">
+<meta property="og:title" content="Python一些技巧">
+<meta property="og:url" content="http://yoursite.com/2016/06/16/Python一些技巧/index.html">
 <meta property="og:site_name" content="Zack's Blog">
-<meta property="og:description" content="记录python一些建议技巧1、使用if a is not b,而非if not a is b。2、不用if len(somelist) == 0来检查空值，而用if not somelist来检查（它会假定:空值将自动评估为False）。3、检测是否为非空值时，用if somelist会默认把非空值判断为True4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。">
-<meta property="og:updated_time" content="2016-06-17T04:17:46.366Z">
+<meta property="og:description" content="记录python一些技巧1、使用if a is not b,而非if not a is b。2、不用if len(somelist) == 0来检查空值，而用if not somelist来检查（它会假定:空值将自动评估为False）。3、检测是否为非空值时，用if somelist会默认把非空值判断为True4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。例如">
+<meta property="og:updated_time" content="2016-06-17T04:22:45.673Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="编写高质量Python代码的59个有效方法读书笔记">
-<meta name="twitter:description" content="记录python一些建议技巧1、使用if a is not b,而非if not a is b。2、不用if len(somelist) == 0来检查空值，而用if not somelist来检查（它会假定:空值将自动评估为False）。3、检测是否为非空值时，用if somelist会默认把非空值判断为True4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。">
+<meta name="twitter:title" content="Python一些技巧">
+<meta name="twitter:description" content="记录python一些技巧1、使用if a is not b,而非if not a is b。2、不用if len(somelist) == 0来检查空值，而用if not somelist来检查（它会假定:空值将自动评估为False）。3、检测是否为非空值时，用if somelist会默认把非空值判断为True4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。例如">
   
     <link rel="alternative" href="/atom.xml" title="Zack&#39;s Blog" type="application/atom+xml">
   
@@ -172,10 +172,10 @@ var _hmt = _hmt || [];
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-编写高质量Python代码的59个有效方法读书笔记" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Python一些技巧" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/06/16/编写高质量Python代码的59个有效方法读书笔记/" class="article-date">
+      <a href="/2016/06/16/Python一些技巧/" class="article-date">
   	<time datetime="2016-06-16T15:20:35.000Z" itemprop="datePublished">2016-06-16</time>
 </a>
     </div>
@@ -189,7 +189,7 @@ var _hmt = _hmt || [];
         
   
     <h1 class="article-title" itemprop="name">
-      编写高质量Python代码的59个有效方法读书笔记
+      Python一些技巧
     </h1>
   
 
@@ -215,7 +215,7 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="记录python一些建议技巧"><a href="#记录python一些建议技巧" class="headerlink" title="记录python一些建议技巧"></a>记录python一些建议技巧</h4><h6 id="1、使用if-a-is-not-b-而非if-not-a-is-b。"><a href="#1、使用if-a-is-not-b-而非if-not-a-is-b。" class="headerlink" title="1、使用if a is not b,而非if not a is b。"></a>1、使用<code>if a is not b</code>,而非<code>if not a is b</code>。</h6><h6 id="2、不用if-len-somelist-0来检查空值，而用if-not-somelist来检查（它会假定-空值将自动评估为False）。"><a href="#2、不用if-len-somelist-0来检查空值，而用if-not-somelist来检查（它会假定-空值将自动评估为False）。" class="headerlink" title="2、不用if len(somelist) == 0来检查空值，而用if not somelist来检查（它会假定:空值将自动评估为False）。"></a>2、不用<code>if len(somelist) == 0</code>来检查空值，而用<code>if not somelist</code>来检查（它会假定:空值将自动评估为False）。</h6><h6 id="3、检测是否为非空值时，用if-somelist会默认把非空值判断为True"><a href="#3、检测是否为非空值时，用if-somelist会默认把非空值判断为True" class="headerlink" title="3、检测是否为非空值时，用if somelist会默认把非空值判断为True"></a>3、检测是否为非空值时，用<code>if somelist</code>会默认把非空值判断为True</h6><h6 id="4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。例如，引入bar包中的foo模块时，应该完整写出from-bar-import-foo。如果一定要用相对名称来编写import语句，那就采用明确的写法-from-import-foo。import语句按顺序分三部分，分别代表标准库模块、第三方模块及自用模块，在每一部分中，各import语句应该按模块的字母顺序来排序。"><a href="#4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。例如，引入bar包中的foo模块时，应该完整写出from-bar-import-foo。如果一定要用相对名称来编写import语句，那就采用明确的写法-from-import-foo。import语句按顺序分三部分，分别代表标准库模块、第三方模块及自用模块，在每一部分中，各import语句应该按模块的字母顺序来排序。" class="headerlink" title="4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。例如，引入bar包中的foo模块时，应该完整写出from bar import foo。如果一定要用相对名称来编写import语句，那就采用明确的写法:from.import foo。import语句按顺序分三部分，分别代表标准库模块、第三方模块及自用模块，在每一部分中，各import语句应该按模块的字母顺序来排序。"></a>4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。例如，引入bar包中的foo模块时，应该完整写出<code>from bar import foo</code>。如果一定要用相对名称来编写import语句，那就采用明确的写法:<code>from.import foo</code>。import语句按顺序分三部分，分别代表标准库模块、第三方模块及自用模块，在每一部分中，各import语句应该按模块的字母顺序来排序。</h6><a id="more"></a>
+        <h4 id="记录python一些技巧"><a href="#记录python一些技巧" class="headerlink" title="记录python一些技巧"></a>记录python一些技巧</h4><h6 id="1、使用if-a-is-not-b-而非if-not-a-is-b。"><a href="#1、使用if-a-is-not-b-而非if-not-a-is-b。" class="headerlink" title="1、使用if a is not b,而非if not a is b。"></a>1、使用<code>if a is not b</code>,而非<code>if not a is b</code>。</h6><h6 id="2、不用if-len-somelist-0来检查空值，而用if-not-somelist来检查（它会假定-空值将自动评估为False）。"><a href="#2、不用if-len-somelist-0来检查空值，而用if-not-somelist来检查（它会假定-空值将自动评估为False）。" class="headerlink" title="2、不用if len(somelist) == 0来检查空值，而用if not somelist来检查（它会假定:空值将自动评估为False）。"></a>2、不用<code>if len(somelist) == 0</code>来检查空值，而用<code>if not somelist</code>来检查（它会假定:空值将自动评估为False）。</h6><h6 id="3、检测是否为非空值时，用if-somelist会默认把非空值判断为True"><a href="#3、检测是否为非空值时，用if-somelist会默认把非空值判断为True" class="headerlink" title="3、检测是否为非空值时，用if somelist会默认把非空值判断为True"></a>3、检测是否为非空值时，用<code>if somelist</code>会默认把非空值判断为True</h6><h6 id="4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。例如，引入bar包中的foo模块时，应该完整写出from-bar-import-foo。如果一定要用相对名称来编写import语句，那就采用明确的写法-from-import-foo。import语句按顺序分三部分，分别代表标准库模块、第三方模块及自用模块，在每一部分中，各import语句应该按模块的字母顺序来排序。"><a href="#4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。例如，引入bar包中的foo模块时，应该完整写出from-bar-import-foo。如果一定要用相对名称来编写import语句，那就采用明确的写法-from-import-foo。import语句按顺序分三部分，分别代表标准库模块、第三方模块及自用模块，在每一部分中，各import语句应该按模块的字母顺序来排序。" class="headerlink" title="4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。例如，引入bar包中的foo模块时，应该完整写出from bar import foo。如果一定要用相对名称来编写import语句，那就采用明确的写法:from.import foo。import语句按顺序分三部分，分别代表标准库模块、第三方模块及自用模块，在每一部分中，各import语句应该按模块的字母顺序来排序。"></a>4、引入模块的时候，总是应该使用绝对名称，而不应该根据当前模块的路径来使用相对名称。例如，引入bar包中的foo模块时，应该完整写出<code>from bar import foo</code>。如果一定要用相对名称来编写import语句，那就采用明确的写法:<code>from.import foo</code>。import语句按顺序分三部分，分别代表标准库模块、第三方模块及自用模块，在每一部分中，各import语句应该按模块的字母顺序来排序。</h6><a id="more"></a>
 <h6 id="5、实现接受str或unicode-并总返回unicode"><a href="#5、实现接受str或unicode-并总返回unicode" class="headerlink" title="5、实现接受str或unicode,并总返回unicode:"></a>5、实现接受str或unicode,并总返回unicode:</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">to_unicode</span><span class="params">(unicode_or_str)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> isinstance(unicode_or_str,str):</span><br><span class="line">    	value = unicode_or_str.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">    	value = unicode_or_str</span><br><span class="line">    <span class="keyword">return</span> value</span><br></pre></td></tr></table></figure>
 <h6 id="6、实现接受str或unicode-并总返回str"><a href="#6、实现接受str或unicode-并总返回str" class="headerlink" title="6、实现接受str或unicode,并总返回str"></a>6、实现接受str或unicode,并总返回str</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">to_str</span><span class="params">(unicode_or_str)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> isinstance(unicode_or_str,unicode):</span><br><span class="line">    	value = unicode_or_str.encode(<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">    	value = unicode_or_str</span><br><span class="line">    <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
 <h6 id="7、用列表推导来取代map和fileter"><a href="#7、用列表推导来取代map和fileter" class="headerlink" title="7、用列表推导来取代map和fileter"></a>7、用列表推导来取代map和fileter</h6><h6 id="8、合并pdf"><a href="#8、合并pdf" class="headerlink" title="8、合并pdf"></a>8、合并pdf</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> PyPDF2 <span class="keyword">import</span> PdfFileReader,PdfFileMerger</span><br><span class="line">files_dir = <span class="string">'e:\\pdf'</span></span><br><span class="line">pdf_files = [f <span class="keyword">for</span> f <span class="keyword">in</span> os.listdir(files_dir) <span class="keyword">if</span> f.endswith(<span class="string">'pdf'</span>)]</span><br><span class="line">merger = PdfFileMerger()</span><br><span class="line"><span class="keyword">for</span> filename <span class="keyword">in</span> pdf_files:</span><br><span class="line">	merger.appedn(PdfFileReader(os.path.join(file_dir,filename),<span class="string">'rb'</span>))</span><br><span class="line">merger.writer(os.path.join(files_dir,<span class="string">'merged_full.pdf'</span>))</span><br></pre></td></tr></table></figure>
@@ -267,7 +267,7 @@ var _hmt = _hmt || [];
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="编写高质量Python代码的59个有效方法读书笔记" data-title="编写高质量Python代码的59个有效方法读书笔记" data-url="http://yoursite.com/2016/06/16/编写高质量Python代码的59个有效方法读书笔记/"></div>
+	<div class="ds-thread" data-thread-key="Python一些技巧" data-title="Python一些技巧" data-url="http://yoursite.com/2016/06/16/Python一些技巧/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
