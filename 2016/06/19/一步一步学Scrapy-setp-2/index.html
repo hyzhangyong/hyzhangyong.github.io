@@ -15,20 +15,24 @@
 
 
 
-<meta name="description" content="关于垂直投影法的python,opncv的实现方式关于垂直投影的具体介绍，就不多说，直接上代码12345678910111213141516171819202122232425262728293031323334import cv2import numpy as np# 灰度化读取图片image = cv2.imreade(&apos;number.jpg&apos;,0)# 将图片二值化retval, img =">
+<meta name="description" content="step 1简单爬取了mininova-ebook第一页的数据，接下来我们来写爬取ebook所有的数据
+首先我们来分析一下页面查看源代码，在点击Next »包含有下一页的链接，我们可以用来实现自动翻页爬取1&amp;lt;strong&amp;gt;&amp;lt;a href=&quot;/sub/50/name/2&quot; title=&quot;Next page&quot;&amp;gt;Next »&amp;lt;/a&amp;gt;&amp;lt;/strong&amp;gt;
+查看">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vertical projection for python-opencv">
-<meta property="og:url" content="http://hyzhangyong.github.io/2016/05/25/vertical-projection-for-python-opencv/index.html">
+<meta property="og:title" content="一步一步学Scrapy:setp 2">
+<meta property="og:url" content="http://hyzhangyong.github.io/2016/06/19/一步一步学Scrapy-setp-2/index.html">
 <meta property="og:site_name" content="Zack's Blog">
-<meta property="og:description" content="关于垂直投影法的python,opncv的实现方式关于垂直投影的具体介绍，就不多说，直接上代码12345678910111213141516171819202122232425262728293031323334import cv2import numpy as np# 灰度化读取图片image = cv2.imreade(&apos;number.jpg&apos;,0)# 将图片二值化retval, img =">
-<meta property="og:image" content="http://7xroxn.com1.z0.glb.clouddn.com/number.png">
-<meta property="og:image" content="http://7xroxn.com1.z0.glb.clouddn.com/paintx.png">
-<meta property="og:image" content="http://7xroxn.com1.z0.glb.clouddn.com/painty.png">
-<meta property="og:updated_time" content="2016-06-17T07:58:38.865Z">
+<meta property="og:description" content="step 1简单爬取了mininova-ebook第一页的数据，接下来我们来写爬取ebook所有的数据
+首先我们来分析一下页面查看源代码，在点击Next »包含有下一页的链接，我们可以用来实现自动翻页爬取1&amp;lt;strong&amp;gt;&amp;lt;a href=&quot;/sub/50/name/2&quot; title=&quot;Next page&quot;&amp;gt;Next »&amp;lt;/a&amp;gt;&amp;lt;/strong&amp;gt;
+查看">
+<meta property="og:image" content="http://7xroxn.com1.z0.glb.clouddn.com/fenye.png">
+<meta property="og:updated_time" content="2016-06-19T07:47:51.155Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vertical projection for python-opencv">
-<meta name="twitter:description" content="关于垂直投影法的python,opncv的实现方式关于垂直投影的具体介绍，就不多说，直接上代码12345678910111213141516171819202122232425262728293031323334import cv2import numpy as np# 灰度化读取图片image = cv2.imreade(&apos;number.jpg&apos;,0)# 将图片二值化retval, img =">
-<meta name="twitter:image" content="http://7xroxn.com1.z0.glb.clouddn.com/number.png">
+<meta name="twitter:title" content="一步一步学Scrapy:setp 2">
+<meta name="twitter:description" content="step 1简单爬取了mininova-ebook第一页的数据，接下来我们来写爬取ebook所有的数据
+首先我们来分析一下页面查看源代码，在点击Next »包含有下一页的链接，我们可以用来实现自动翻页爬取1&amp;lt;strong&amp;gt;&amp;lt;a href=&quot;/sub/50/name/2&quot; title=&quot;Next page&quot;&amp;gt;Next »&amp;lt;/a&amp;gt;&amp;lt;/strong&amp;gt;
+查看">
+<meta name="twitter:image" content="http://7xroxn.com1.z0.glb.clouddn.com/fenye.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +64,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>vertical projection for python-opencv | Zack&#39;s Blog</title>
+<title>一步一步学Scrapy:setp 2 | Zack&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -261,11 +265,11 @@
     </div>
     <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
-      <div class="body-wrap"><article id="post-vertical-projection-for-python-opencv" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-一步一步学Scrapy-setp-2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/05/25/vertical-projection-for-python-opencv/" class="article-date">
-      <time datetime="2016-05-25T13:59:01.000Z" itemprop="datePublished">2016-05-25</time>
+      <a href="/2016/06/19/一步一步学Scrapy-setp-2/" class="article-date">
+      <time datetime="2016-06-19T05:57:17.000Z" itemprop="datePublished">2016-06-19</time>
 </a>
     </div>
   
@@ -278,7 +282,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      vertical projection for python-opencv
+      一步一步学Scrapy:setp 2
     </h1>
   
 
@@ -287,13 +291,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/python/">python</a>
+    <a class="article-category-link" href="/categories/python/">python</a><a class="article-category-link" href="/categories/python/scarpy/">scarpy</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/">opencv</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/projection/">projection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vertical/">vertical</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scarpy/">scarpy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分页爬取，爬虫/">分页爬取，爬虫</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -303,10 +307,14 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="关于垂直投影法的python-opncv的实现方式"><a href="#关于垂直投影法的python-opncv的实现方式" class="headerlink" title="关于垂直投影法的python,opncv的实现方式"></a>关于垂直投影法的python,opncv的实现方式</h2><h4 id="关于垂直投影的具体介绍，就不多说，直接上代码"><a href="#关于垂直投影的具体介绍，就不多说，直接上代码" class="headerlink" title="关于垂直投影的具体介绍，就不多说，直接上代码"></a>关于垂直投影的具体介绍，就不多说，直接上代码</h4><p><img src="http://7xroxn.com1.z0.glb.clouddn.com/number.png" alt=""><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 灰度化读取图片</span></span><br><span class="line">image = cv2.imreade(<span class="string">'number.jpg'</span>,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将图片二值化</span></span><br><span class="line">retval, img = cv2.threshold(image,<span class="number">170</span>,<span class="number">255</span>,cv2.THRESH_BINAPY_INV)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个空白图片(img.shape[0]为height,img.shape[1]为width)</span></span><br><span class="line">paintx = np.zeros(img.shape,np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将新图像数组中的所有通道元素的值都设置为0</span></span><br><span class="line">cv2.cv.Zero(cv2.cv.fromarray(paintx))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建width长度都为0的数组</span></span><br><span class="line">w = [<span class="number">0</span>]*image.shape[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对每一行计算投影值</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(image.shape[<span class="number">1</span>]):</span><br><span class="line">	<span class="keyword">for</span> y <span class="keyword">in</span> range(image.shape[<span class="number">0</span>]):</span><br><span class="line">    	t = cv2.cv.Get2D(cv2.cv.fromarray(img),y,x)</span><br><span class="line">        <span class="keyword">if</span> t[<span class="number">0</span>] == <span class="number">0</span>:</span><br><span class="line">        	w[x] += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line"><span class="comment"># 绘制垂直投影图</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(image.shape[<span class="number">1</span>]):</span><br><span class="line">	<span class="keyword">for</span> y <span class="keyword">in</span> range(w[x]):</span><br><span class="line">    	<span class="comment"># 把为0的像素变成白</span></span><br><span class="line">        cv2.cv.Set2D(cv2.cv.fromarray(paintx),y,x(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">0</span>))</span><br><span class="line">        </span><br><span class="line"><span class="comment"># 显示图片</span></span><br><span class="line">cv2.imshow(<span class="string">'paintx'</span>,paintx)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xroxn.com1.z0.glb.clouddn.com/paintx.png" alt=""></p>
-<h4 id="另外把水平投影也一起写了"><a href="#另外把水平投影也一起写了" class="headerlink" title="另外把水平投影也一起写了"></a>另外把水平投影也一起写了</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">painty = np.zeros(img.shape,np.uint8)</span><br><span class="line">cv2.cv.Zero(cv2.cv.fromarray(painty))</span><br><span class="line">h = [<span class="number">0</span>]*image.shape[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> y <span class="keyword">in</span> range(image.shape[<span class="number">0</span>]):</span><br><span class="line">	<span class="keyword">for</span> x <span class="keyword">in</span> range(image.shape[<span class="number">1</span>]):</span><br><span class="line">    	s = cv2.cv.Get2D(cv2.cv.fromarray(img),y,x)</span><br><span class="line">        <span class="keyword">if</span> s[<span class="number">0</span>] == <span class="number">0</span>:</span><br><span class="line">        	h[y] += <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> y <span class="keyword">in</span> range(image.shape(<span class="number">0</span>)):</span><br><span class="line">	<span class="keyword">for</span> x <span class="keyword">in</span> range(h[y]):</span><br><span class="line">    	cv2.cv.Set2D(cv2.cv.fromarray(painty),y,x,(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">0</span>))</span><br><span class="line">cv2.imshow(<span class="string">'painty'</span>,painty)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xroxn.com1.z0.glb.clouddn.com/painty.png" alt=""></p>
+        <p>step 1简单爬取了mininova-ebook第一页的数据，接下来我们来写爬取ebook所有的数据</p>
+<h4 id="首先我们来分析一下页面"><a href="#首先我们来分析一下页面" class="headerlink" title="首先我们来分析一下页面"></a>首先我们来分析一下页面</h4><p><img src="http://7xroxn.com1.z0.glb.clouddn.com/fenye.png" alt=""><br>查看源代码，在点击Next »包含有下一页的链接，我们可以用来实现自动翻页爬取<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">strong</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/sub/50/name/2"</span> <span class="attr">title</span>=<span class="string">"Next page"</span>&gt;</span>Next »<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>查看一下最后一页的源代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"disabled"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>Next »<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>很容易就可以发现如何判断最后一页</p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">next_page = response.xpath(<span class="string">u'//strong/a[text()="Next »"]/@href'</span>).extract()</span><br><span class="line"><span class="keyword">if</span>  next_page:</span><br><span class="line">	<span class="keyword">for</span> next_page <span class="keyword">in</span> next_page:</span><br><span class="line">		next_page = <span class="string">'http://www.mininova.org'</span> + next_page</span><br><span class="line">		<span class="keyword">yield</span> scrapy.Request(next_page,callback=self.parse)</span><br></pre></td></tr></table></figure>
+<p>由于每一页的代码格式是一样的，那么就直接<code>callback=self.parse</code>直接调用parse函数来获取数据。</p>
+<h3 id="简单配置Scrapy防止爬虫给封"><a href="#简单配置Scrapy防止爬虫给封" class="headerlink" title="简单配置Scrapy防止爬虫给封"></a>简单配置Scrapy防止爬虫给封</h3><p>1、详细配置留下一篇在详解，这里只设置download_delay值，它的作用主要设置下载的等待时间，大规模集中的访问对服务器的影响最大，相当于段时间增大服务器负载。<br>2、在mininova目录下有一个<code>settings.py</code>文件，打开<code>settings.py</code>找到<code># DOWNLOAD_DELAY</code>去掉注释号，修改值为3<code>DOWNLOAD_DELAY = 3</code></p>
 
       
     </div>
@@ -315,13 +323,13 @@
   
     
     <div class="copyright">
-        <p><span>Title:</span><a href="/2016/05/25/vertical-projection-for-python-opencv/">vertical projection for python-opencv</a></p>
+        <p><span>Title:</span><a href="/2016/06/19/一步一步学Scrapy-setp-2/">一步一步学Scrapy:setp 2</a></p>
         <p><span>Author:</span><a href="/" title="Back to Homepage">Zack</a></p>
-        <p><span>Created:</span>2016-05-25, 21:59:01</p>
-        <p><span>Updated:</span>2016-06-17, 15:58:38</p>
+        <p><span>Created:</span>2016-06-19, 13:57:17</p>
+        <p><span>Updated:</span>2016-06-19, 15:47:51</p>
         <p>
-            <span>Full URL:</span><a class="post-url" href="/2016/05/25/vertical-projection-for-python-opencv/" title="vertical projection for python-opencv">http://hyzhangyong.github.io/2016/05/25/vertical-projection-for-python-opencv/</a>
-            <span class="copy-path" data-clipboard-text="From http://hyzhangyong.github.io/2016/05/25/vertical-projection-for-python-opencv/　　By Zack" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <span>Full URL:</span><a class="post-url" href="/2016/06/19/一步一步学Scrapy-setp-2/" title="一步一步学Scrapy:setp 2">http://hyzhangyong.github.io/2016/06/19/一步一步学Scrapy-setp-2/</a>
+            <span class="copy-path" data-clipboard-text="From http://hyzhangyong.github.io/2016/06/19/一步一步学Scrapy-setp-2/　　By Zack" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -333,16 +341,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/06/16/Python一些技巧/">
-                    Python一些技巧
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/04/28/amf-for-python/">
-                    amf for python
+                <a href="/2016/06/17/一步一步学Scrapy-step-1/">
+                    一步一步学Scrapy:step 1
                 </a>
             </div>
         
@@ -353,7 +355,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">Contents</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于垂直投影法的python-opncv的实现方式"><span class="toc-number">1.</span> <span class="toc-text">关于垂直投影法的python,opncv的实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关于垂直投影的具体介绍，就不多说，直接上代码"><span class="toc-number">1.0.1.</span> <span class="toc-text">关于垂直投影的具体介绍，就不多说，直接上代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#另外把水平投影也一起写了"><span class="toc-number">1.0.2.</span> <span class="toc-text">另外把水平投影也一起写了</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#首先我们来分析一下页面"><span class="toc-number">1.</span> <span class="toc-text">首先我们来分析一下页面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现"><span class="toc-number">2.</span> <span class="toc-text">代码实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单配置Scrapy防止爬虫给封"><span class="toc-number"></span> <span class="toc-text">简单配置Scrapy防止爬虫给封</span></a>
 </div>
 <style>
     .left-col .switch-btn,
@@ -384,7 +386,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"vertical projection for python-opencv　| Zack's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"一步一步学Scrapy:setp 2　| Zack's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -400,7 +402,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/05/25/vertical-projection-for-python-opencv/" data-title="vertical projection for python-opencv" data-url="http://hyzhangyong.github.io/2016/05/25/vertical-projection-for-python-opencv/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/06/19/一步一步学Scrapy-setp-2/" data-title="一步一步学Scrapy:setp 2" data-url="http://hyzhangyong.github.io/2016/06/19/一步一步学Scrapy-setp-2/"></div>
     <script>
         var duoshuoQuery = {short_name:"hyzhangyong"};
         var loadComment = function(){
@@ -423,15 +425,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/06/16/Python一些技巧/" title="Pre: Python一些技巧">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
         
 
         <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/04/28/amf-for-python/" title="Next: amf for python">
+            <a href="/2016/06/17/一步一步学Scrapy-step-1/" title="Next: 一步一步学Scrapy:step 1">
                 <i class="fa fa-angle-right"></i>
             </a>
         
