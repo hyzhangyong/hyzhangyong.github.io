@@ -49,11 +49,11 @@
     
       <category term="python" scheme="http://hyzhangyong.github.io/tags/python/"/>
     
-      <category term="爬虫" scheme="http://hyzhangyong.github.io/tags/%E7%88%AC%E8%99%AB/"/>
-    
       <category term="scarpy" scheme="http://hyzhangyong.github.io/tags/scarpy/"/>
     
       <category term="分页爬取" scheme="http://hyzhangyong.github.io/tags/%E5%88%86%E9%A1%B5%E7%88%AC%E5%8F%96/"/>
+    
+      <category term="爬虫" scheme="http://hyzhangyong.github.io/tags/%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   
@@ -199,9 +199,9 @@
     
       <category term="python" scheme="http://hyzhangyong.github.io/tags/python/"/>
     
-      <category term="amf" scheme="http://hyzhangyong.github.io/tags/amf/"/>
-    
       <category term="爬虫" scheme="http://hyzhangyong.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    
+      <category term="amf" scheme="http://hyzhangyong.github.io/tags/amf/"/>
     
   </entry>
   
@@ -282,7 +282,7 @@
     <link href="http://hyzhangyong.github.io/2016/03/09/Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85Hexo%E4%B8%8E%E6%90%AD%E5%BB%BABlog/"/>
     <id>http://hyzhangyong.github.io/2016/03/09/Ubuntu下安装Hexo与搭建Blog/</id>
     <published>2016-03-09T06:39:27.000Z</published>
-    <updated>2016-06-17T13:23:02.083Z</updated>
+    <updated>2016-06-21T09:59:24.474Z</updated>
     
     <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言:&quot;&gt;&lt;/a&gt;前言:&lt;/h2&gt;&lt;p&gt;最近在github安了家，在很早之前就了解过可以利用Hexo+Github,建立静态博客。决定自己搭建一个。&lt;/p&gt;
 &lt;h2 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;blockquote&gt;
@@ -296,11 +296,16 @@
 &lt;h4 id=&quot;1-安装-Node-js&quot;&gt;&lt;a href=&quot;#1-安装-Node-js&quot; class=&quot;headerlink&quot; title=&quot;1.安装 Node.js&quot;&gt;&lt;/a&gt;1.安装 Node.js&lt;/h4&gt;&lt;p&gt;安装Node.js的最佳方式是使用nvm.&lt;br&gt;curl:&lt;br&gt;&lt;code&gt;curl https://raw.github.com/creationix/nvm/master/install.sh | sh&lt;/code&gt;&lt;br&gt;wget&lt;br&gt;&lt;code&gt;wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh&lt;/code&gt;&lt;br&gt;安装完后，重启终端并执行下列命令即可安装Node.js.&lt;br&gt;&lt;code&gt;nvm install 4&lt;/code&gt;&lt;/p&gt;
 &lt;h4 id=&quot;2-安装-Git&quot;&gt;&lt;a href=&quot;#2-安装-Git&quot; class=&quot;headerlink&quot; title=&quot;2.安装 Git&quot;&gt;&lt;/a&gt;2.安装 Git&lt;/h4&gt;&lt;p&gt;&lt;code&gt;sudo apt-get install git-core&lt;/code&gt;&lt;/p&gt;
 &lt;h4 id=&quot;3-安装-Hexo&quot;&gt;&lt;a href=&quot;#3-安装-Hexo&quot; class=&quot;headerlink&quot; title=&quot;3.安装 Hexo&quot;&gt;&lt;/a&gt;3.安装 Hexo&lt;/h4&gt;&lt;p&gt;所有必备得引用程序安装完成后，即可使用npm安装Hexo&lt;br&gt;&lt;code&gt;npm install -g hexo-cli&lt;/code&gt;&lt;/p&gt;
-&lt;h2 id=&quot;配置&quot;&gt;&lt;a href=&quot;#配置&quot; class=&quot;headerlink&quot; title=&quot;配置&quot;&gt;&lt;/a&gt;配置&lt;/h2&gt;&lt;p&gt;1.创建目录 Myblog&lt;br&gt;&lt;code&gt;mkdir Myblog&lt;/code&gt;&lt;br&gt;2.初始化 Hexo&lt;br&gt;进入博客目录:&lt;code&gt;cd Myblog&lt;/code&gt;&lt;br&gt;执行&lt;code&gt;hexo init&lt;/code&gt;进行初始化，Hexo会自动在该文件夹下下载搭建网站所需得所有文件。&lt;br&gt;在Myblog目录下执行&lt;br&gt;&lt;code&gt;hexo g&lt;/code&gt;&lt;br&gt;&lt;code&gt;hexo s&lt;/code&gt;&lt;br&gt;然后在浏览器访问&lt;code&gt;http://localhost:4000&lt;/code&gt;,就应该可以访问博客了。&lt;/p&gt;
-&lt;h3 id=&quot;建立Repository&quot;&gt;&lt;a href=&quot;#建立Repository&quot; class=&quot;headerlink&quot; title=&quot;建立Repository&quot;&gt;&lt;/a&gt;建立Repository&lt;/h3&gt;&lt;p&gt;建立与用户名对应的仓库，仓库名必须为【your_user_name.github.io】，固定写法，然后建立关联.&lt;br&gt;&lt;code&gt;cd Myblog&lt;/code&gt;&lt;br&gt;&lt;code&gt;vim _config.yml&lt;/code&gt;&lt;br&gt;翻到最下面，修改deploy&lt;br&gt;&lt;code&gt;type: git&lt;/code&gt;&lt;br&gt;&lt;code&gt;repository: https://github.com/hyzhangyong/hyzhangyong.github.io.git&lt;/code&gt;&lt;br&gt;&lt;code&gt;branch: master&lt;/code&gt;&lt;br&gt;&lt;code&gt;_config.yml参数后面必须有空格&lt;/code&gt;&lt;br&gt;然后执行配置命令:&lt;br&gt;&lt;code&gt;hexo deploy&lt;/code&gt;&lt;br&gt;然后在浏览器中输入&lt;code&gt;http://hyzhangyong.github.io&lt;/code&gt;即可访问博客&lt;/p&gt;
-&lt;h3 id=&quot;编写新文章&quot;&gt;&lt;a href=&quot;#编写新文章&quot; class=&quot;headerlink&quot; title=&quot;编写新文章&quot;&gt;&lt;/a&gt;编写新文章&lt;/h3&gt;&lt;p&gt;执行&lt;br&gt;&lt;code&gt;cd Myblog&lt;/code&gt;&lt;br&gt;&lt;code&gt;hexo new &amp;quot;my new article&amp;quot;&lt;/code&gt;&lt;br&gt;就会自动在_posts目录下建立my new article.md文档，编辑该文档即可写作。&lt;/p&gt;
-&lt;h3 id=&quot;上传博客&quot;&gt;&lt;a href=&quot;#上传博客&quot; class=&quot;headerlink&quot; title=&quot;上传博客&quot;&gt;&lt;/a&gt;上传博客&lt;/h3&gt;&lt;p&gt;每次在本地写好博客后，执行以下三步骤发布博客:&lt;br&gt;&lt;code&gt;hexo clean&lt;/code&gt;&lt;br&gt;&lt;code&gt;hexo generate&lt;/code&gt;&lt;br&gt;&lt;code&gt;hexo deploy&lt;/code&gt;&lt;/p&gt;
-</content>
+&lt;h2 id=&quot;配置&quot;&gt;&lt;a href=&quot;#配置&quot; class=&quot;headerlink&quot; title=&quot;配置&quot;&gt;&lt;/a&gt;配置&lt;/h2&gt;&lt;h4 id=&quot;1-创建目录-Myblog&quot;&gt;&lt;a href=&quot;#1-创建目录-Myblog&quot; class=&quot;headerlink&quot; title=&quot;1.创建目录 Myblog&quot;&gt;&lt;/a&gt;1.创建目录 Myblog&lt;/h4&gt;&lt;p&gt;&lt;code&gt;mkdir Myblog&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&quot;2-初始化-Hexo&quot;&gt;&lt;a href=&quot;#2-初始化-Hexo&quot; class=&quot;headerlink&quot; title=&quot;2.初始化 Hexo&quot;&gt;&lt;/a&gt;2.初始化 Hexo&lt;/h4&gt;&lt;p&gt;进入博客目录:&lt;code&gt;cd Myblog&lt;/code&gt;&lt;br&gt;执行&lt;code&gt;hexo init&lt;/code&gt;进行初始化，Hexo会自动在该文件夹下下载搭建网站所需得所有文件。&lt;br&gt;在Myblog目录下执行&lt;br&gt;&lt;code&gt;hexo g&lt;/code&gt;&lt;br&gt;&lt;code&gt;hexo s&lt;/code&gt;&lt;br&gt;然后在浏览器访问&lt;code&gt;http://localhost:4000&lt;/code&gt;,就应该可以访问博客了。&lt;/p&gt;
+&lt;h2 id=&quot;建立Repository&quot;&gt;&lt;a href=&quot;#建立Repository&quot; class=&quot;headerlink&quot; title=&quot;建立Repository&quot;&gt;&lt;/a&gt;建立Repository&lt;/h2&gt;&lt;p&gt;建立与用户名对应的仓库，仓库名必须为【your_user_name.github.io】，固定写法，然后建立关联.&lt;br&gt;&lt;code&gt;cd Myblog&lt;/code&gt;&lt;br&gt;&lt;code&gt;vim _config.yml&lt;/code&gt;&lt;br&gt;翻到最下面，修改deploy&lt;br&gt;&lt;code&gt;type: git&lt;/code&gt;&lt;br&gt;&lt;code&gt;repository: https://github.com/hyzhangyong/hyzhangyong.github.io.git&lt;/code&gt;&lt;br&gt;&lt;code&gt;branch: master&lt;/code&gt;&lt;br&gt;&lt;code&gt;_config.yml参数后面必须有空格&lt;/code&gt;&lt;br&gt;然后执行配置命令:&lt;br&gt;&lt;code&gt;hexo deploy&lt;/code&gt;&lt;br&gt;然后在浏览器中输入&lt;code&gt;http://hyzhangyong.github.io&lt;/code&gt;即可访问博客&lt;/p&gt;
+&lt;h2 id=&quot;编写新文章&quot;&gt;&lt;a href=&quot;#编写新文章&quot; class=&quot;headerlink&quot; title=&quot;编写新文章&quot;&gt;&lt;/a&gt;编写新文章&lt;/h2&gt;&lt;p&gt;执行&lt;br&gt;&lt;code&gt;cd Myblog&lt;/code&gt;&lt;br&gt;&lt;code&gt;hexo new &amp;quot;my new article&amp;quot;&lt;/code&gt;&lt;br&gt;就会自动在_posts目录下建立my new article.md文档，编辑该文档即可写作。&lt;/p&gt;
+&lt;h2 id=&quot;上传博客&quot;&gt;&lt;a href=&quot;#上传博客&quot; class=&quot;headerlink&quot; title=&quot;上传博客&quot;&gt;&lt;/a&gt;上传博客&lt;/h2&gt;&lt;p&gt;每次在本地写好博客后，执行以下三步骤发布博客:&lt;br&gt;&lt;code&gt;hexo clean&lt;/code&gt;&lt;br&gt;&lt;code&gt;hexo generate&lt;/code&gt;&lt;br&gt;&lt;code&gt;hexo deploy&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&quot;安装主题&quot;&gt;&lt;a href=&quot;#安装主题&quot; class=&quot;headerlink&quot; title=&quot;安装主题&quot;&gt;&lt;/a&gt;安装主题&lt;/h2&gt;&lt;p&gt;以我现在的主题为例&lt;/p&gt;
+&lt;h4 id=&quot;1、进入博客目录，安装主题&quot;&gt;&lt;a href=&quot;#1、进入博客目录，安装主题&quot; class=&quot;headerlink&quot; title=&quot;1、进入博客目录，安装主题&quot;&gt;&lt;/a&gt;1、进入博客目录，安装主题&lt;/h4&gt;&lt;p&gt;&lt;code&gt;git clone https://github.com/MOxFIVE/hexo-theme-yelee.git themes/yelee&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&quot;2、设置博客根目录下的-config-yml&quot;&gt;&lt;a href=&quot;#2、设置博客根目录下的-config-yml&quot; class=&quot;headerlink&quot; title=&quot;2、设置博客根目录下的_config.yml&quot;&gt;&lt;/a&gt;2、设置博客根目录下的_config.yml&lt;/h4&gt;&lt;p&gt;&lt;code&gt;theme: yelee&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&quot;3、检查更新&quot;&gt;&lt;a href=&quot;#3、检查更新&quot; class=&quot;headerlink&quot; title=&quot;3、检查更新&quot;&gt;&lt;/a&gt;3、检查更新&lt;/h4&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;cd themes/yelee&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;git pull&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;4、详情配置见yelee目录下的README-md或者https-github-com-MOxFIVE-hexo-theme-yelee&quot;&gt;&lt;a href=&quot;#4、详情配置见yelee目录下的README-md或者https-github-com-MOxFIVE-hexo-theme-yelee&quot; class=&quot;headerlink&quot; title=&quot;4、详情配置见yelee目录下的README.md或者https://github.com/MOxFIVE/hexo-theme-yelee&quot;&gt;&lt;/a&gt;4、详情配置见&lt;code&gt;yelee&lt;/code&gt;目录下的README.md或者&lt;code&gt;https://github.com/MOxFIVE/hexo-theme-yelee&lt;/code&gt;&lt;/h4&gt;</content>
     
     <summary type="html">
     
