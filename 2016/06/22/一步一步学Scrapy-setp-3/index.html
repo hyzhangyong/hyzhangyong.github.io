@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Zack" />
+
+
+
+<meta name="description" content="博客园博主一叶知求写的很详细啦，我这里就直接转贴（源地址）。
+Scrapy防止爬虫给屏蔽策略要防止爬虫给屏蔽主要有以下几个策略1、动态设置user agent2、禁用cookies3、设置延迟下载4、使用 Google cache5、使用IP地址池（ Tor project 、VPN和代理IP）6、使用 Crawlera">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一步一步学Scrapy:setp 3">
+<meta property="og:url" content="http://hyzhangyong.github.io/2016/06/22/一步一步学Scrapy-setp-3/index.html">
+<meta property="og:site_name" content="Zack's Blog">
+<meta property="og:description" content="博客园博主一叶知求写的很详细啦，我这里就直接转贴（源地址）。
+Scrapy防止爬虫给屏蔽策略要防止爬虫给屏蔽主要有以下几个策略1、动态设置user agent2、禁用cookies3、设置延迟下载4、使用 Google cache5、使用IP地址池（ Tor project 、VPN和代理IP）6、使用 Crawlera">
+<meta property="og:updated_time" content="2016-06-22T04:20:11.932Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一步一步学Scrapy:setp 3">
+<meta name="twitter:description" content="博客园博主一叶知求写的很详细啦，我这里就直接转贴（源地址）。
+Scrapy防止爬虫给屏蔽策略要防止爬虫给屏蔽主要有以下几个策略1、动态设置user agent2、禁用cookies3、设置延迟下载4、使用 Google cache5、使用IP地址池（ Tor project 、VPN和代理IP）6、使用 Crawlera">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternative" href="/atom.xml" title="Zack&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>一步一步学Scrapy:setp 3 | Zack&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://7xroxn.com1.z0.glb.clouddn.com/1.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Zack</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:hyzhangyong@yeah.net" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/hyzhangyong" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amf/">amf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/projection/">projection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scarpy/">scarpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scrapy/">scrapy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/threading/">threading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertical/">vertical</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分页爬取/">分页爬取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技巧/">技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程池/">线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/购物车/">购物车</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">一个迷路的雄鹰，努力想找回自我。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Zack</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://7xroxn.com1.z0.glb.clouddn.com/1.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Zack</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:hyzhangyong@yeah.net" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/hyzhangyong" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-一步一步学Scrapy-setp-3" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/22/一步一步学Scrapy-setp-3/" class="article-date">
+      <time datetime="2016-06-22T02:41:57.000Z" itemprop="datePublished">2016-06-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一步一步学Scrapy:setp 3
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/python/">python</a><a class="article-category-link" href="/categories/python/scarpy/">scarpy</a><a class="article-category-link" href="/categories/python/scarpy/爬虫/">爬虫</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scrapy/">scrapy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>博客园博主一叶知求写的很详细啦，我这里就直接转贴（<a href="http://www.cnblogs.com/rwxwsblog/p/4575894.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">源地址</a>）。</p>
+<h2 id="Scrapy防止爬虫给屏蔽策略"><a href="#Scrapy防止爬虫给屏蔽策略" class="headerlink" title="Scrapy防止爬虫给屏蔽策略"></a>Scrapy防止爬虫给屏蔽策略</h2><h4 id="要防止爬虫给屏蔽主要有以下几个策略"><a href="#要防止爬虫给屏蔽主要有以下几个策略" class="headerlink" title="要防止爬虫给屏蔽主要有以下几个策略"></a>要防止爬虫给屏蔽主要有以下几个策略</h4><p>1、动态设置user agent<br>2、禁用cookies<br>3、设置延迟下载<br>4、使用 Google cache<br>5、使用IP地址池（ Tor project 、VPN和代理IP）<br>6、使用 Crawlera<br><a id="more"></a></p>
+<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><h3 id="创建middlewares-py"><a href="#创建middlewares-py" class="headerlink" title="创建middlewares.py"></a>创建middlewares.py</h3><p>scrapy代理IP、user agent的切换都是通过DOWNLOADER_MIDDLEWARES进行控制，下面我们在博客根目录下创建middlewares.py文件（mininova/middlewares.py）。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">from</span> settings <span class="keyword">import</span> PROXIES</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RandomUserAgent</span><span class="params">(object)</span>:</span></span><br><span class="line">  <span class="string">"""Randomly rotate user agents based on a list of predefined ones"""</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, agents)</span>:</span></span><br><span class="line">    self.agents = agents</span><br><span class="line"><span class="meta">  @classmethod</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">from_crawler</span><span class="params">(cls, crawler)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> cls(crawler.settings.getlist(<span class="string">'USER_AGENTS'</span>))</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">process_request</span><span class="params">(self, request, spider)</span>:</span></span><br><span class="line">    <span class="comment">#print "**************************" + random.choice(self.agents)</span></span><br><span class="line">    request.headers.setdefault(<span class="string">'User-Agent'</span>, random.choice(self.agents))</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ProxyMiddleware</span><span class="params">(object)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">process_request</span><span class="params">(self, request, spider)</span>:</span></span><br><span class="line">    proxy = random.choice(PROXIES)</span><br><span class="line">    <span class="keyword">if</span> proxy[<span class="string">'user_pass'</span>] <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">      request.meta[<span class="string">'proxy'</span>] = <span class="string">"http://%s"</span> % proxy[<span class="string">'ip_port'</span>]</span><br><span class="line">      encoded_user_pass = base64.encodestring(proxy[<span class="string">'user_pass'</span>])</span><br><span class="line">      request.headers[<span class="string">'Proxy-Authorization'</span>] = <span class="string">'Basic '</span> + encoded_user_pass</span><br><span class="line">      <span class="keyword">print</span> <span class="string">"**************ProxyMiddleware have pass************"</span> + proxy[<span class="string">'ip_port'</span>]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      <span class="keyword">print</span> <span class="string">"**************ProxyMiddleware no pass************"</span> + proxy[<span class="string">'ip_port'</span>]</span><br><span class="line">      request.meta[<span class="string">'proxy'</span>] = <span class="string">"http://%s"</span> % proxy[<span class="string">'ip_port'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>1、类RandomUserAgent主要用来动态获取user agent，user agent列表USER_AGENTS在settings.py中进行配置。<br>2、类ProxyMiddleware用来切换代理，proxy列表PROXIES也是在settings.py中进行配置 。</p>
+<h3 id="修改settings-py配置USER-AGENTS和PROXIES"><a href="#修改settings-py配置USER-AGENTS和PROXIES" class="headerlink" title="修改settings.py配置USER_AGENTS和PROXIES"></a>修改settings.py配置USER_AGENTS和PROXIES</h3><h5 id="添加USER-AGENTS"><a href="#添加USER-AGENTS" class="headerlink" title="添加USER_AGENTS"></a>添加USER_AGENTS</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">USER_AGENTS = [</span><br><span class="line">  <span class="string">"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; AcooBrowser; .NET CLR 1.1.4322; .NET CLR 2.0.50727)"</span>,</span><br><span class="line">  <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Acoo Browser; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; .NET CLR 3.0.04506)"</span>,</span><br><span class="line">  <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0; AOL 9.5; AOLBuild 4337.35; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)"</span>,</span><br><span class="line">  <span class="string">"Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)"</span>,</span><br><span class="line">  <span class="string">"Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 2.0.50727; Media Center PC 6.0)"</span>,</span><br><span class="line">  <span class="string">"Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 1.0.3705; .NET CLR 1.1.4322)"</span>,</span><br><span class="line">  <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 5.2; .NET CLR 1.1.4322; .NET CLR 2.0.50727; InfoPath.2; .NET CLR 3.0.04506.30)"</span>,</span><br><span class="line">  <span class="string">"Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN) AppleWebKit/523.15 (KHTML, like Gecko, Safari/419.3) Arora/0.3 (Change: 287 c9dfb30)"</span>,</span><br><span class="line">  <span class="string">"Mozilla/5.0 (X11; U; Linux; en-US) AppleWebKit/527+ (KHTML, like Gecko, Safari/419.3) Arora/0.6"</span>,</span><br><span class="line">  <span class="string">"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.2pre) Gecko/20070215 K-Ninja/2.1.1"</span>,</span><br><span class="line">  <span class="string">"Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9) Gecko/20080705 Firefox/3.0 Kapiko/3.0"</span>,</span><br><span class="line">  <span class="string">"Mozilla/5.0 (X11; Linux i686; U;) Gecko/20070322 Kazehakase/0.4.5"</span>,</span><br><span class="line">  <span class="string">"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.8) Gecko Fedora/1.9.0.8-1.fc10 Kazehakase/0.5.6"</span>,</span><br><span class="line">  <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11"</span>,</span><br><span class="line">  <span class="string">"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7 Safari/535.20"</span>,</span><br><span class="line">  <span class="string">"Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; fr) Presto/2.9.168 Version/11.52"</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h5 id="添加代理IP设置PROXIES"><a href="#添加代理IP设置PROXIES" class="headerlink" title="添加代理IP设置PROXIES"></a>添加代理IP设置PROXIES</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">PROXIES = [</span><br><span class="line">  &#123;<span class="string">'ip_port'</span>: <span class="string">'111.11.228.75:80'</span>, <span class="string">'user_pass'</span>: <span class="string">''</span>&#125;,</span><br><span class="line">  &#123;<span class="string">'ip_port'</span>: <span class="string">'120.198.243.22:80'</span>, <span class="string">'user_pass'</span>: <span class="string">''</span>&#125;,</span><br><span class="line">  &#123;<span class="string">'ip_port'</span>: <span class="string">'111.8.60.9:8123'</span>, <span class="string">'user_pass'</span>: <span class="string">''</span>&#125;,</span><br><span class="line">  &#123;<span class="string">'ip_port'</span>: <span class="string">'101.71.27.120:80'</span>, <span class="string">'user_pass'</span>: <span class="string">''</span>&#125;,</span><br><span class="line">  &#123;<span class="string">'ip_port'</span>: <span class="string">'122.96.59.104:80'</span>, <span class="string">'user_pass'</span>: <span class="string">''</span>&#125;,</span><br><span class="line">  &#123;<span class="string">'ip_port'</span>: <span class="string">'122.224.249.122:8088'</span>, <span class="string">'user_pass'</span>: <span class="string">''</span>&#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>代理IP可以网上搜索一下或者购买代理池，上面的代理IP获取自：<a href="http://www.xici.net.co。" target="_blank" rel="external">http://www.xici.net.co。</a></p>
+<h5 id="禁用cookies"><a href="#禁用cookies" class="headerlink" title="禁用cookies"></a>禁用cookies</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COOKIES_ENABLED = False</span><br></pre></td></tr></table></figure>
+<h5 id="设置下载延迟"><a href="#设置下载延迟" class="headerlink" title="设置下载延迟"></a>设置下载延迟</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOAD_DELAY = 3</span><br></pre></td></tr></table></figure>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy crawl mininova</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/06/22/一步一步学Scrapy-setp-3/">一步一步学Scrapy:setp 3</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Zack</a></p>
+        <p><span>发布时间:</span>2016-06-22, 10:41:57</p>
+        <p><span>最后更新:</span>2016-06-22, 12:20:11</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/06/22/一步一步学Scrapy-setp-3/" title="一步一步学Scrapy:setp 3">http://hyzhangyong.github.io/2016/06/22/一步一步学Scrapy-setp-3/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://hyzhangyong.github.io/2016/06/22/一步一步学Scrapy-setp-3/　　作者: Zack" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/06/19/一步一步学Scrapy-setp-2/">
+                    一步一步学Scrapy:setp 2
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Scrapy防止爬虫给屏蔽策略"><span class="toc-number">1.</span> <span class="toc-text">Scrapy防止爬虫给屏蔽策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#要防止爬虫给屏蔽主要有以下几个策略"><span class="toc-number">1.0.1.</span> <span class="toc-text">要防止爬虫给屏蔽主要有以下几个策略</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现方式"><span class="toc-number">2.</span> <span class="toc-text">实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建middlewares-py"><span class="toc-number">2.1.</span> <span class="toc-text">创建middlewares.py</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改settings-py配置USER-AGENTS和PROXIES"><span class="toc-number">2.2.</span> <span class="toc-text">修改settings.py配置USER_AGENTS和PROXIES</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#添加USER-AGENTS"><span class="toc-number">2.2.0.1.</span> <span class="toc-text">添加USER_AGENTS</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#添加代理IP设置PROXIES"><span class="toc-number">2.2.0.2.</span> <span class="toc-text">添加代理IP设置PROXIES</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#禁用cookies"><span class="toc-number">2.2.0.3.</span> <span class="toc-text">禁用cookies</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#设置下载延迟"><span class="toc-number">2.2.0.4.</span> <span class="toc-text">设置下载延迟</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试"><span class="toc-number">3.</span> <span class="toc-text">测试</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script>
+    yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+</script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"一步一步学Scrapy:setp 3　| Zack's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/06/22/一步一步学Scrapy-setp-3/" data-title="一步一步学Scrapy:setp 3" data-url="http://hyzhangyong.github.io/2016/06/22/一步一步学Scrapy-setp-3/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"hyzhangyong"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/06/19/一步一步学Scrapy-setp-2/" title="下一篇: 一步一步学Scrapy:setp 2">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/06/22/一步一步学Scrapy-setp-3/">一步一步学Scrapy:setp 3</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/19/一步一步学Scrapy-setp-2/">一步一步学Scrapy:setp 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/17/一步一步学Scrapy-step-1/">一步一步学Scrapy:step 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/16/Python一些技巧/">Python一些技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/vertical-projection-for-python-opencv/">vertical projection for python-opencv</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/28/amf-for-python/">amf for python</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/17/python线程池控制/">python线程池控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/飞入购物车特效/">jQuery购物车特效</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/09/Ubuntu下安装Hexo与搭建Blog/">Ubuntu下安装Hexo与搭建Blog</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Zack
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

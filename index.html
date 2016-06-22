@@ -263,6 +263,73 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-一步一步学Scrapy-setp-3" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/22/一步一步学Scrapy-setp-3/" class="article-date">
+      <time datetime="2016-06-22T02:41:57.000Z" itemprop="datePublished">2016-06-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/22/一步一步学Scrapy-setp-3/">一步一步学Scrapy:setp 3</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>博客园博主一叶知求写的很详细啦，我这里就直接转贴（<a href="http://www.cnblogs.com/rwxwsblog/p/4575894.html?utm_source=tuicool&amp;utm_medium=referral">源地址</a>）。</p>
+<h2 id="Scrapy防止爬虫给屏蔽策略"><a href="#Scrapy防止爬虫给屏蔽策略" class="headerlink" title="Scrapy防止爬虫给屏蔽策略"></a>Scrapy防止爬虫给屏蔽策略</h2><h4 id="要防止爬虫给屏蔽主要有以下几个策略"><a href="#要防止爬虫给屏蔽主要有以下几个策略" class="headerlink" title="要防止爬虫给屏蔽主要有以下几个策略"></a>要防止爬虫给屏蔽主要有以下几个策略</h4><p>1、动态设置user agent<br>2、禁用cookies<br>3、设置延迟下载<br>4、使用 Google cache<br>5、使用IP地址池（ Tor project 、VPN和代理IP）<br>6、使用 Crawlera<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/python/">python</a><a class="article-category-link" href="/categories/python/scarpy/">scarpy</a><a class="article-category-link" href="/categories/python/scarpy/爬虫/">爬虫</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scrapy/">scrapy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/06/22/一步一步学Scrapy-setp-3/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-一步一步学Scrapy-setp-2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -529,285 +596,10 @@
 
 
   
-    <article id="post-amf-for-python" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/2016/04/28/amf-for-python/" class="article-date">
-      <time datetime="2016-04-28T15:06:10.000Z" itemprop="datePublished">2016-04-28</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/28/amf-for-python/">amf for python</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="Python爬取FLASH播放器中的资料。"><a href="#Python爬取FLASH播放器中的资料。" class="headerlink" title="Python爬取FLASH播放器中的资料。"></a>Python爬取FLASH播放器中的资料。</h2><h4 id="一、首先了解一下AMF协议"><a href="#一、首先了解一下AMF协议" class="headerlink" title="一、首先了解一下AMF协议:"></a>一、首先了解一下AMF协议:</h4><blockquote>
-<p>AMF(Action Message Format)是Flash与服务端通信的一种常见的二进制编码模式，其传输效率高，可以在HTTP层面上传输。现在很多Flash WebGame都采用这样的消息格式。<br>AMF协议是基于Http协议的.<br>它的内容处理过程大致是这样:<br>1.从客户端获取Http请求(Request)流.<br>2.对流进行解串行化(Deserialize)，得到服务器端程序能够识别的数据，并建立一个响应(Response)消息<br>3.Debug开始<br>4.对流进行各种处理(记录、许可、服务)得到返回值<br>5.对响应流进行串行化<br>6.发送Http响应给客户端</p>
-</blockquote>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/python/">python</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/amf/">amf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/04/28/amf-for-python/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-python线程池控制" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/17/python线程池控制/" class="article-date">
-      <time datetime="2016-03-17T02:54:15.000Z" itemprop="datePublished">2016-03-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/17/python线程池控制/">python线程池控制</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>最近一个项目上使用线程池，设定处理项1W，10线程，但是需要检测线程进行状态。出现错误N次，就自动终止线程。实现如下:</p>
-<h4 id="线程池代码"><a href="#线程池代码" class="headerlink" title="线程池代码"></a>线程池代码</h4>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/python/">python</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/threading/">threading</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程池/">线程池</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/03/17/python线程池控制/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-飞入购物车特效" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/11/飞入购物车特效/" class="article-date">
-      <time datetime="2016-03-11T14:16:42.000Z" itemprop="datePublished">2016-03-11</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/11/飞入购物车特效/">jQuery购物车特效</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>最近开发一个平台，需要购物车，仿照网上一些素材制作了一个飞入购物车的特效。<br>使用了以下脚本:</p>
-<blockquote>
-<p>1.jquery.min.js<br>2.jquery.fly.min.js</p>
-</blockquote>
-<p>物品列表HTML代码:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"goodslist"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"url"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"inner"</span>&gt;</span></span><br><span class="line">        	<span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"addcar"</span> <span class="attr">herf</span>=<span class="string">"javascript:void(0)"</span>&gt;</span>加入购物车<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>购物车代码:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"car"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">herf</span>=<span class="string">"#"</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">i</span> <span class="attr">id</span>=<span class="string">"end"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">        购物车</span><br><span class="line">    <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/html/">html</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/购物车/">购物车</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/03/11/飞入购物车特效/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Ubuntu下安装Hexo与搭建Blog" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/09/Ubuntu下安装Hexo与搭建Blog/" class="article-date">
-      <time datetime="2016-03-09T06:39:27.000Z" itemprop="datePublished">2016-03-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/09/Ubuntu下安装Hexo与搭建Blog/">Ubuntu下安装Hexo与搭建Blog</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="前言"><a href="#前言" class="headerlink" title="前言:"></a>前言:</h2><p>最近在github安了家，在很早之前就了解过可以利用Hexo+Github,建立静态博客。决定自己搭建一个。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote>
-<ul>
-<li>安装Node.js</li>
-<li>安装Git</li>
-<li>安装Hexo</li>
-</ul>
-</blockquote>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/03/09/Ubuntu下安装Hexo与搭建Blog/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">
