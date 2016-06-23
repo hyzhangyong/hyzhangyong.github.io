@@ -141,13 +141,13 @@
                 <div class="tips-box hide">
                     <div class="tips-arrow"></div>
                     <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                        <li>Menu</li>
+                        <li>Tags</li>
                         
-                        <li>友情链接</li>
+                        <li>Friends</li>
                         
                         
-                        <li>关于我</li>
+                        <li>About Me</li>
                         
                     </ul>
                 </div>
@@ -259,9 +259,74 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-vertical-projection-for-python-opencv" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/25/vertical-projection-for-python-opencv/" class="article-date">
+      <time datetime="2016-05-25T13:59:01.000Z" itemprop="datePublished">2016-05-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/25/vertical-projection-for-python-opencv/">vertical projection for python-opencv</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="关于垂直投影法的python-opncv的实现方式"><a href="#关于垂直投影法的python-opncv的实现方式" class="headerlink" title="关于垂直投影法的python,opncv的实现方式"></a>关于垂直投影法的python,opncv的实现方式</h2><h4 id="关于垂直投影的具体介绍，就不多说，直接上代码"><a href="#关于垂直投影的具体介绍，就不多说，直接上代码" class="headerlink" title="关于垂直投影的具体介绍，就不多说，直接上代码"></a>关于垂直投影的具体介绍，就不多说，直接上代码</h4><p><img src="http://7xroxn.com1.z0.glb.clouddn.com/number.png" alt=""><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 灰度化读取图片</span></span><br><span class="line">image = cv2.imreade(<span class="string">'number.jpg'</span>,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将图片二值化</span></span><br><span class="line">retval, img = cv2.threshold(image,<span class="number">170</span>,<span class="number">255</span>,cv2.THRESH_BINAPY_INV)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个空白图片(img.shape[0]为height,img.shape[1]为width)</span></span><br><span class="line">paintx = np.zeros(img.shape,np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将新图像数组中的所有通道元素的值都设置为0</span></span><br><span class="line">cv2.cv.Zero(cv2.cv.fromarray(paintx))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建width长度都为0的数组</span></span><br><span class="line">w = [<span class="number">0</span>]*image.shape[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对每一行计算投影值</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(image.shape[<span class="number">1</span>]):</span><br><span class="line">	<span class="keyword">for</span> y <span class="keyword">in</span> range(image.shape[<span class="number">0</span>]):</span><br><span class="line">    	t = cv2.cv.Get2D(cv2.cv.fromarray(img),y,x)</span><br><span class="line">        <span class="keyword">if</span> t[<span class="number">0</span>] == <span class="number">0</span>:</span><br><span class="line">        	w[x] += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line"><span class="comment"># 绘制垂直投影图</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(image.shape[<span class="number">1</span>]):</span><br><span class="line">	<span class="keyword">for</span> y <span class="keyword">in</span> range(w[x]):</span><br><span class="line">    	<span class="comment"># 把为0的像素变成白</span></span><br><span class="line">        cv2.cv.Set2D(cv2.cv.fromarray(paintx),y,x(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">0</span>))</span><br><span class="line">        </span><br><span class="line"><span class="comment"># 显示图片</span></span><br><span class="line">cv2.imshow(<span class="string">'paintx'</span>,paintx)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://7xroxn.com1.z0.glb.clouddn.com/paintx.png" alt=""></p>
+<h4 id="另外把水平投影也一起写了"><a href="#另外把水平投影也一起写了" class="headerlink" title="另外把水平投影也一起写了"></a>另外把水平投影也一起写了</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">painty = np.zeros(img.shape,np.uint8)</span><br><span class="line">cv2.cv.Zero(cv2.cv.fromarray(painty))</span><br><span class="line">h = [<span class="number">0</span>]*image.shape[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> y <span class="keyword">in</span> range(image.shape[<span class="number">0</span>]):</span><br><span class="line">	<span class="keyword">for</span> x <span class="keyword">in</span> range(image.shape[<span class="number">1</span>]):</span><br><span class="line">    	s = cv2.cv.Get2D(cv2.cv.fromarray(img),y,x)</span><br><span class="line">        <span class="keyword">if</span> s[<span class="number">0</span>] == <span class="number">0</span>:</span><br><span class="line">        	h[y] += <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> y <span class="keyword">in</span> range(image.shape(<span class="number">0</span>)):</span><br><span class="line">	<span class="keyword">for</span> x <span class="keyword">in</span> range(h[y]):</span><br><span class="line">    	cv2.cv.Set2D(cv2.cv.fromarray(painty),y,x,(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">0</span>))</span><br><span class="line">cv2.imshow(<span class="string">'painty'</span>,painty)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xroxn.com1.z0.glb.clouddn.com/painty.png" alt=""></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/oepncv/">oepncv</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/">opencv</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/projection/">projection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vertical/">vertical</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-amf-for-python" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -556,14 +621,14 @@
                 2016 Zack
             </div>
             <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
             </div>
         </div>
         
             <div class="visit">
                 
                     <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >本站到访数: 
+                        <span id="site-visit" >Site Visitors: 
                             <span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
@@ -573,7 +638,7 @@
                 
                 
                     <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">本页阅读量: 
+                        <span id="page-visit">Page Hits: 
                             <span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
@@ -606,9 +671,9 @@
 
 
 <div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
 </div>
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>

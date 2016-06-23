@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Zack" />
+
+
+
+<meta name="description" content="具体步骤1、将采集到的彩色车牌图像转换成灰度图2、灰度化的图像利用高斯平滑处理后，再对其进行中直滤波3、使用Sobel算子对图像进行边缘检测4、对二值化的图像进行腐蚀，膨胀，开运算，闭运算的形态学组合变换5、对形态学变换后的图像进行轮廓查找，根据车牌的长宽比提取车牌">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python实现车牌定位及分割">
+<meta property="og:url" content="http://hyzhangyong.github.io/2016/06/23/Python实现车牌定位及分割/index.html">
+<meta property="og:site_name" content="Zack's Blog">
+<meta property="og:description" content="具体步骤1、将采集到的彩色车牌图像转换成灰度图2、灰度化的图像利用高斯平滑处理后，再对其进行中直滤波3、使用Sobel算子对图像进行边缘检测4、对二值化的图像进行腐蚀，膨胀，开运算，闭运算的形态学组合变换5、对形态学变换后的图像进行轮廓查找，根据车牌的长宽比提取车牌">
+<meta property="og:image" content="http://7xroxn.com1.z0.glb.clouddn.com/gray.png">
+<meta property="og:image" content="http://7xroxn.com1.z0.glb.clouddn.com/gaussian.png">
+<meta property="og:image" content="http://7xroxn.com1.z0.glb.clouddn.com/median.png">
+<meta property="og:image" content="http://7xroxn.com1.z0.glb.clouddn.com/sobel.png">
+<meta property="og:image" content="http://7xroxn.com1.z0.glb.clouddn.com/binary.png">
+<meta property="og:image" content="http://7xroxn.com1.z0.glb.clouddn.com/dilation2.png">
+<meta property="og:updated_time" content="2016-06-23T16:43:14.316Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python实现车牌定位及分割">
+<meta name="twitter:description" content="具体步骤1、将采集到的彩色车牌图像转换成灰度图2、灰度化的图像利用高斯平滑处理后，再对其进行中直滤波3、使用Sobel算子对图像进行边缘检测4、对二值化的图像进行腐蚀，膨胀，开运算，闭运算的形态学组合变换5、对形态学变换后的图像进行轮廓查找，根据车牌的长宽比提取车牌">
+<meta name="twitter:image" content="http://7xroxn.com1.z0.glb.clouddn.com/gray.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternative" href="/atom.xml" title="Zack&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Python实现车牌定位及分割 | Zack&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://7xroxn.com1.z0.glb.clouddn.com/1.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Zack</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:hyzhangyong@yeah.net" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/hyzhangyong" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amf/">amf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/projection/">projection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scarpy/">scarpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scrapy/">scrapy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/threading/">threading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertical/">vertical</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分页爬取/">分页爬取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技巧/">技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程池/">线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/购物车/">购物车</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">一个迷路的雄鹰，努力想找回自我。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Zack</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://7xroxn.com1.z0.glb.clouddn.com/1.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Zack</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:hyzhangyong@yeah.net" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/hyzhangyong" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
+</nav>
+      <div class="body-wrap"><article id="post-Python实现车牌定位及分割" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/23/Python实现车牌定位及分割/" class="article-date">
+      <time datetime="2016-06-23T07:47:02.000Z" itemprop="datePublished">2016-06-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python实现车牌定位及分割
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/opencv/">opencv</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/">opencv</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h2><p>1、将采集到的彩色车牌图像转换成灰度图<br>2、灰度化的图像利用高斯平滑处理后，再对其进行中直滤波<br>3、使用Sobel算子对图像进行边缘检测<br>4、对二值化的图像进行腐蚀，膨胀，开运算，闭运算的形态学组合变换<br>5、对形态学变换后的图像进行轮廓查找，根据车牌的长宽比提取车牌<br><a id="more"></a></p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="图像灰度化"><a href="#图像灰度化" class="headerlink" title="图像灰度化"></a>图像灰度化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xroxn.com1.z0.glb.clouddn.com/gray.png" alt=""></p>
+<h3 id="高斯平滑，中值滤波处理"><a href="#高斯平滑，中值滤波处理" class="headerlink" title="高斯平滑，中值滤波处理"></a>高斯平滑，中值滤波处理</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gaussian = cv2.GaussianBlur(gray, (<span class="number">3</span>, <span class="number">3</span>), <span class="number">0</span>, <span class="number">0</span>, cv2.BORDER_DEFAULT)</span><br><span class="line">median = cv2.medianBlur(gaussian, <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xroxn.com1.z0.glb.clouddn.com/gaussian.png" alt=""><br><img src="http://7xroxn.com1.z0.glb.clouddn.com/median.png" alt=""></p>
+<h3 id="Sobel边缘检测"><a href="#Sobel边缘检测" class="headerlink" title="Sobel边缘检测"></a>Sobel边缘检测</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sobel = cv2.Sobel(median, cv2.CV_8U, <span class="number">1</span>, <span class="number">0</span>,  ksize = <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xroxn.com1.z0.glb.clouddn.com/sobel.png" alt=""></p>
+<h3 id="二值化"><a href="#二值化" class="headerlink" title="二值化"></a>二值化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ret, binary = cv2.threshold(sobel, <span class="number">170</span>, <span class="number">255</span>, cv2.THRESH_BINARY)</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xroxn.com1.z0.glb.clouddn.com/binary.png" alt=""></p>
+<h3 id="对二值化的图像进行腐蚀，膨胀，开运算，闭运算的形态学组合变换"><a href="#对二值化的图像进行腐蚀，膨胀，开运算，闭运算的形态学组合变换" class="headerlink" title="对二值化的图像进行腐蚀，膨胀，开运算，闭运算的形态学组合变换"></a>对二值化的图像进行腐蚀，膨胀，开运算，闭运算的形态学组合变换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 膨胀和腐蚀操作的核函数</span></span><br><span class="line">element1 = cv2.getStructuringElement(cv2.MORPH_RECT, (<span class="number">9</span>, <span class="number">1</span>))</span><br><span class="line">element2 = cv2.getStructuringElement(cv2.MORPH_RECT, (<span class="number">8</span>, <span class="number">6</span>))</span><br><span class="line"><span class="comment"># 膨胀一次，让轮廓突出</span></span><br><span class="line">dilation = cv2.dilate(binary, element2, iterations = <span class="number">1</span>)</span><br><span class="line"><span class="comment"># 腐蚀一次，去掉细节</span></span><br><span class="line">erosion = cv2.erode(dilation, element1, iterations = <span class="number">1</span>)</span><br><span class="line"><span class="comment"># 再次膨胀，让轮廓明显一些</span></span><br><span class="line">dilation2 = cv2.dilate(erosion, element2,iterations = <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xroxn.com1.z0.glb.clouddn.com/dilation2.png" alt=""></p>
+<h3 id="对形态学变换后的图像进行轮廓查找，根据车牌的长宽比提取车牌"><a href="#对形态学变换后的图像进行轮廓查找，根据车牌的长宽比提取车牌" class="headerlink" title="对形态学变换后的图像进行轮廓查找，根据车牌的长宽比提取车牌"></a>对形态学变换后的图像进行轮廓查找，根据车牌的长宽比提取车牌</h3><p>1、查找车牌区域<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findPlateNumberRegion</span><span class="params">(img)</span>:</span></span><br><span class="line">	region = []</span><br><span class="line">	<span class="comment"># 查找轮廓</span></span><br><span class="line">	contours,hierarchy = cv2.findContours(img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line"></span><br><span class="line">	<span class="comment"># 筛选面积小的</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(len(contours)):</span><br><span class="line">		cnt = contours[i]</span><br><span class="line">		<span class="comment"># 计算该轮廓的面积</span></span><br><span class="line">		area = cv2.contourArea(cnt)</span><br><span class="line"></span><br><span class="line">		<span class="comment"># 面积小的都筛选掉</span></span><br><span class="line">		<span class="keyword">if</span> (area &lt; <span class="number">2000</span>):</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">		<span class="comment"># 轮廓近似，作用很小</span></span><br><span class="line">		epsilon = <span class="number">0.001</span> * cv2.arcLength(cnt,<span class="keyword">True</span>)</span><br><span class="line">		approx = cv2.approxPolyDP(cnt, epsilon, <span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">		<span class="comment"># 找到最小的矩形，该矩形可能有方向</span></span><br><span class="line">		rect = cv2.minAreaRect(cnt)</span><br><span class="line">		<span class="keyword">print</span> <span class="string">"rect is: "</span></span><br><span class="line">		<span class="keyword">print</span> rect</span><br><span class="line"></span><br><span class="line">		<span class="comment"># box是四个点的坐标</span></span><br><span class="line">		box = cv2.cv.BoxPoints(rect)</span><br><span class="line">		box = np.int0(box)</span><br><span class="line"></span><br><span class="line">		<span class="comment"># 计算高和宽</span></span><br><span class="line">		height = abs(box[<span class="number">0</span>][<span class="number">1</span>] - box[<span class="number">2</span>][<span class="number">1</span>])</span><br><span class="line">		width = abs(box[<span class="number">0</span>][<span class="number">0</span>] - box[<span class="number">2</span>][<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">		<span class="comment"># 车牌正常情况下长高比在2.7-5之间</span></span><br><span class="line">		ratio =float(width) / float(height)</span><br><span class="line">		<span class="keyword">if</span> (ratio &gt; <span class="number">5</span> <span class="keyword">or</span> ratio &lt; <span class="number">2</span>):</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">		region.append(box)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> region</span><br></pre></td></tr></table></figure></p>
+<p>2、用绿线绘出车牌区域和切割车牌<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用绿线画出这些找到的轮廓</span></span><br><span class="line"><span class="keyword">for</span> box <span class="keyword">in</span> region:</span><br><span class="line">	cv2.drawContours(img, [box], <span class="number">0</span>, (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">2</span>)</span><br><span class="line">ys = [box[<span class="number">0</span>, <span class="number">1</span>], box[<span class="number">1</span>, <span class="number">1</span>], box[<span class="number">2</span>, <span class="number">1</span>], box[<span class="number">3</span>, <span class="number">1</span>]]</span><br><span class="line">xs = [box[<span class="number">0</span>, <span class="number">0</span>], box[<span class="number">1</span>, <span class="number">0</span>], box[<span class="number">2</span>, <span class="number">0</span>], box[<span class="number">3</span>, <span class="number">0</span>]]</span><br><span class="line">ys_sorted_index = np.argsort(ys)</span><br><span class="line">xs_sorted_index = np.argsort(xs)</span><br><span class="line"></span><br><span class="line">x1 = box[xs_sorted_index[<span class="number">0</span>], <span class="number">0</span>]</span><br><span class="line">x2 = box[xs_sorted_index[<span class="number">3</span>], <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">y1 = box[ys_sorted_index[<span class="number">0</span>], <span class="number">1</span>]</span><br><span class="line">y2 = box[ys_sorted_index[<span class="number">3</span>], <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">img_org2 = img.copy()</span><br><span class="line">img_plate = img_org2[y1:y2, x1:x2]</span><br></pre></td></tr></table></figure></p>
+<p>代码地址在:<a href="https://github.com/hyzhangyong/platenumber" target="_blank" rel="external">https://github.com/hyzhangyong/platenumber</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这并不完善，并不能识别所有环境下的车牌，需要进一步改善识别模式。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2016/06/23/Python实现车牌定位及分割/">Python实现车牌定位及分割</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">Zack</a></p>
+        <p><span>Created:</span>2016-06-23, 15:47:02</p>
+        <p><span>Updated:</span>2016-06-24, 00:43:14</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2016/06/23/Python实现车牌定位及分割/" title="Python实现车牌定位及分割">http://hyzhangyong.github.io/2016/06/23/Python实现车牌定位及分割/</a>
+            <span class="copy-path" data-clipboard-text="From http://hyzhangyong.github.io/2016/06/23/Python实现车牌定位及分割/　　By Zack" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/06/22/一步一步学Scrapy-setp-3/">
+                    一步一步学Scrapy:setp 3
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">Contents</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#具体步骤"><span class="toc-number">1.</span> <span class="toc-text">具体步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实现"><span class="toc-number">2.</span> <span class="toc-text">代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#图像灰度化"><span class="toc-number">2.1.</span> <span class="toc-text">图像灰度化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高斯平滑，中值滤波处理"><span class="toc-number">2.2.</span> <span class="toc-text">高斯平滑，中值滤波处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sobel边缘检测"><span class="toc-number">2.3.</span> <span class="toc-text">Sobel边缘检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二值化"><span class="toc-number">2.4.</span> <span class="toc-text">二值化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对二值化的图像进行腐蚀，膨胀，开运算，闭运算的形态学组合变换"><span class="toc-number">2.5.</span> <span class="toc-text">对二值化的图像进行腐蚀，膨胀，开运算，闭运算的形态学组合变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对形态学变换后的图像进行轮廓查找，根据车牌的长宽比提取车牌"><span class="toc-number">2.6.</span> <span class="toc-text">对形态学变换后的图像进行轮廓查找，根据车牌的长宽比提取车牌</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+
+<script>
+    yiliaConfig.toc = ["Hide", "Show", !!"false"];
+</script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Python实现车牌定位及分割　| Zack's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/06/23/Python实现车牌定位及分割/" data-title="Python实现车牌定位及分割" data-url="http://hyzhangyong.github.io/2016/06/23/Python实现车牌定位及分割/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"hyzhangyong"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/06/22/一步一步学Scrapy-setp-3/" title="Next: 一步一步学Scrapy:setp 3">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/Python实现车牌定位及分割/">Python实现车牌定位及分割</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/22/一步一步学Scrapy-setp-3/">一步一步学Scrapy:setp 3</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/19/一步一步学Scrapy-setp-2/">一步一步学Scrapy:setp 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/17/一步一步学Scrapy-step-1/">一步一步学Scrapy:step 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/16/Python一些技巧/">Python一些技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/vertical-projection-for-python-opencv/">vertical projection for python-opencv</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/28/amf-for-python/">amf for python</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/17/python线程池控制/">python线程池控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/飞入购物车特效/">jQuery购物车特效</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/09/Ubuntu下安装Hexo与搭建Blog/">Ubuntu下安装Hexo与搭建Blog</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Zack
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >Site Visitors: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">Page Hits: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
