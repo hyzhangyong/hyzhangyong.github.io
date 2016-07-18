@@ -15,20 +15,30 @@
 
 
 
-<meta name="description" content="关于垂直投影法的python,opncv的实现方式关于垂直投影的具体介绍，就不多说，直接上代码12345678910111213141516171819202122232425262728293031323334import cv2import numpy as np# 灰度化读取图片image = cv2.imreade(&apos;number.jpg&apos;,0)# 将图片二值化retval, img =">
+<meta name="description" content="微信点餐平台开发 （一）接下来我们将一步一步学习Flask+微信公众平台+新浪SAE平台开发一个点餐平台。
+功能介绍此点餐平台有以下功能:1、预约管理2、菜单管理3、线路导航
+微信平台接口主要用到微信公众平台的以下接口:1、信息接口，用来输出用户服务信息2、地理位置信息服务3、自定义菜单4、事件推送
+功能实现首先在微信的公众平台与新浪SAE平台上注册账户。此处不作详细介绍
+在SAE上搭建Pytho">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vertical projection for python-opencv">
-<meta property="og:url" content="http://hyzhangyong.github.io/2016/05/25/vertical-projection-for-python-opencv/index.html">
+<meta property="og:title" content="Python开发微信点餐系统（一）">
+<meta property="og:url" content="http://hyzhangyong.github.io/2016/07/18/Python开发微信点餐系统（一）/index.html">
 <meta property="og:site_name" content="Zack's Blog">
-<meta property="og:description" content="关于垂直投影法的python,opncv的实现方式关于垂直投影的具体介绍，就不多说，直接上代码12345678910111213141516171819202122232425262728293031323334import cv2import numpy as np# 灰度化读取图片image = cv2.imreade(&apos;number.jpg&apos;,0)# 将图片二值化retval, img =">
-<meta property="og:image" content="http://7xroxn.com1.z0.glb.clouddn.com/number.png">
-<meta property="og:image" content="http://7xroxn.com1.z0.glb.clouddn.com/paintx.png">
-<meta property="og:image" content="http://7xroxn.com1.z0.glb.clouddn.com/painty.png">
-<meta property="og:updated_time" content="2016-06-27T05:00:36.177Z">
+<meta property="og:description" content="微信点餐平台开发 （一）接下来我们将一步一步学习Flask+微信公众平台+新浪SAE平台开发一个点餐平台。
+功能介绍此点餐平台有以下功能:1、预约管理2、菜单管理3、线路导航
+微信平台接口主要用到微信公众平台的以下接口:1、信息接口，用来输出用户服务信息2、地理位置信息服务3、自定义菜单4、事件推送
+功能实现首先在微信的公众平台与新浪SAE平台上注册账户。此处不作详细介绍
+在SAE上搭建Pytho">
+<meta property="og:image" content="http://7xroxn.com1.z0.glb.clouddn.com/weixintoken.jpg">
+<meta property="og:updated_time" content="2016-07-18T15:19:53.133Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vertical projection for python-opencv">
-<meta name="twitter:description" content="关于垂直投影法的python,opncv的实现方式关于垂直投影的具体介绍，就不多说，直接上代码12345678910111213141516171819202122232425262728293031323334import cv2import numpy as np# 灰度化读取图片image = cv2.imreade(&apos;number.jpg&apos;,0)# 将图片二值化retval, img =">
-<meta name="twitter:image" content="http://7xroxn.com1.z0.glb.clouddn.com/number.png">
+<meta name="twitter:title" content="Python开发微信点餐系统（一）">
+<meta name="twitter:description" content="微信点餐平台开发 （一）接下来我们将一步一步学习Flask+微信公众平台+新浪SAE平台开发一个点餐平台。
+功能介绍此点餐平台有以下功能:1、预约管理2、菜单管理3、线路导航
+微信平台接口主要用到微信公众平台的以下接口:1、信息接口，用来输出用户服务信息2、地理位置信息服务3、自定义菜单4、事件推送
+功能实现首先在微信的公众平台与新浪SAE平台上注册账户。此处不作详细介绍
+在SAE上搭建Pytho">
+<meta name="twitter:image" content="http://7xroxn.com1.z0.glb.clouddn.com/weixintoken.jpg">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +70,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>vertical projection for python-opencv | Zack&#39;s Blog</title>
+<title>Python开发微信点餐系统（一） | Zack&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -261,11 +271,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-vertical-projection-for-python-opencv" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Python开发微信点餐系统（一）" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/05/25/vertical-projection-for-python-opencv/" class="article-date">
-      <time datetime="2016-05-25T13:59:01.000Z" itemprop="datePublished">2016-05-25</time>
+      <a href="/2016/07/18/Python开发微信点餐系统（一）/" class="article-date">
+      <time datetime="2016-07-18T15:18:36.000Z" itemprop="datePublished">2016-07-18</time>
 </a>
     </div>
   
@@ -278,7 +288,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      vertical projection for python-opencv
+      Python开发微信点餐系统（一）
     </h1>
   
 
@@ -286,14 +296,10 @@
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/opencv/">opencv</a>
-    </div>
-
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/">opencv</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/projection/">projection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vertical/">vertical</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flask/">flask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sae/">sae</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信公众平台/">微信公众平台</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -303,10 +309,14 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h2 id="关于垂直投影法的python-opncv的实现方式"><a href="#关于垂直投影法的python-opncv的实现方式" class="headerlink" title="关于垂直投影法的python,opncv的实现方式"></a>关于垂直投影法的python,opncv的实现方式</h2><h4 id="关于垂直投影的具体介绍，就不多说，直接上代码"><a href="#关于垂直投影的具体介绍，就不多说，直接上代码" class="headerlink" title="关于垂直投影的具体介绍，就不多说，直接上代码"></a>关于垂直投影的具体介绍，就不多说，直接上代码</h4><p><img src="http://7xroxn.com1.z0.glb.clouddn.com/number.png" alt=""><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 灰度化读取图片</span></span><br><span class="line">image = cv2.imreade(<span class="string">'number.jpg'</span>,<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将图片二值化</span></span><br><span class="line">retval, img = cv2.threshold(image,<span class="number">170</span>,<span class="number">255</span>,cv2.THRESH_BINAPY_INV)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个空白图片(img.shape[0]为height,img.shape[1]为width)</span></span><br><span class="line">paintx = np.zeros(img.shape,np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将新图像数组中的所有通道元素的值都设置为0</span></span><br><span class="line">cv2.cv.Zero(cv2.cv.fromarray(paintx))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建width长度都为0的数组</span></span><br><span class="line">w = [<span class="number">0</span>]*image.shape[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对每一行计算投影值</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(image.shape[<span class="number">1</span>]):</span><br><span class="line">	<span class="keyword">for</span> y <span class="keyword">in</span> range(image.shape[<span class="number">0</span>]):</span><br><span class="line">    	t = cv2.cv.Get2D(cv2.cv.fromarray(img),y,x)</span><br><span class="line">        <span class="keyword">if</span> t[<span class="number">0</span>] == <span class="number">0</span>:</span><br><span class="line">        	w[x] += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line"><span class="comment"># 绘制垂直投影图</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(image.shape[<span class="number">1</span>]):</span><br><span class="line">	<span class="keyword">for</span> y <span class="keyword">in</span> range(w[x]):</span><br><span class="line">    	<span class="comment"># 把为0的像素变成白</span></span><br><span class="line">        cv2.cv.Set2D(cv2.cv.fromarray(paintx),y,x(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">0</span>))</span><br><span class="line">        </span><br><span class="line"><span class="comment"># 显示图片</span></span><br><span class="line">cv2.imshow(<span class="string">'paintx'</span>,paintx)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xroxn.com1.z0.glb.clouddn.com/paintx.png" alt=""></p>
-<h4 id="另外把水平投影也一起写了"><a href="#另外把水平投影也一起写了" class="headerlink" title="另外把水平投影也一起写了"></a>另外把水平投影也一起写了</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">painty = np.zeros(img.shape,np.uint8)</span><br><span class="line">cv2.cv.Zero(cv2.cv.fromarray(painty))</span><br><span class="line">h = [<span class="number">0</span>]*image.shape[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">for</span> y <span class="keyword">in</span> range(image.shape[<span class="number">0</span>]):</span><br><span class="line">	<span class="keyword">for</span> x <span class="keyword">in</span> range(image.shape[<span class="number">1</span>]):</span><br><span class="line">    	s = cv2.cv.Get2D(cv2.cv.fromarray(img),y,x)</span><br><span class="line">        <span class="keyword">if</span> s[<span class="number">0</span>] == <span class="number">0</span>:</span><br><span class="line">        	h[y] += <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> y <span class="keyword">in</span> range(image.shape(<span class="number">0</span>)):</span><br><span class="line">	<span class="keyword">for</span> x <span class="keyword">in</span> range(h[y]):</span><br><span class="line">    	cv2.cv.Set2D(cv2.cv.fromarray(painty),y,x,(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">0</span>))</span><br><span class="line">cv2.imshow(<span class="string">'painty'</span>,painty)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xroxn.com1.z0.glb.clouddn.com/painty.png" alt=""></p>
+        <h2 id="微信点餐平台开发-（一）"><a href="#微信点餐平台开发-（一）" class="headerlink" title="微信点餐平台开发 （一）"></a>微信点餐平台开发 （一）</h2><p>接下来我们将一步一步学习Flask+微信公众平台+新浪SAE平台开发一个点餐平台。</p>
+<h4 id="功能介绍"><a href="#功能介绍" class="headerlink" title="功能介绍"></a>功能介绍</h4><p>此点餐平台有以下功能:<br>1、预约管理<br>2、菜单管理<br>3、线路导航</p>
+<h4 id="微信平台接口"><a href="#微信平台接口" class="headerlink" title="微信平台接口"></a>微信平台接口</h4><p>主要用到微信公众平台的以下接口:<br>1、信息接口，用来输出用户服务信息<br>2、地理位置信息服务<br>3、自定义菜单<br>4、事件推送</p>
+<h4 id="功能实现"><a href="#功能实现" class="headerlink" title="功能实现"></a>功能实现</h4><h5 id="首先在微信的公众平台与新浪SAE平台上注册账户。"><a href="#首先在微信的公众平台与新浪SAE平台上注册账户。" class="headerlink" title="首先在微信的公众平台与新浪SAE平台上注册账户。"></a>首先在微信的公众平台与新浪SAE平台上注册账户。</h5><p>此处不作详细介绍</p>
+<h5 id="在SAE上搭建Python应用"><a href="#在SAE上搭建Python应用" class="headerlink" title="在SAE上搭建Python应用"></a>在SAE上搭建Python应用</h5><p>在新浪云中选择云应用SAE，创建新应用。为了方便开发调试，我们需要安装SAE本地开发环境。<br>1、安装<br>直接使用pip或者easy_install安装sae-python-dev即可<br>2、基本使用<br>进入应用的本地开发目录，也就是index.wsgi和config.yaml所在的目录。运行<code>dev_server.py</code>命令启动测试server<br>3、使用MySQL服务<br>首先配置好MySQL本地开发server。然后使用-mysql参数运行dev_server.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dev_server.py --mysql=user:password@host:port</span><br></pre></td></tr></table></figure></p>
+<h5 id="配置SAE与微信公众平台互通"><a href="#配置SAE与微信公众平台互通" class="headerlink" title="配置SAE与微信公众平台互通"></a>配置SAE与微信公众平台互通</h5><p>公众号消息服务器网址接入验证，在开发目录下新建myapp.py<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request</span><br><span class="line"></span><br><span class="line"><span class="comment"># 公众号消息服务器网址接入验证</span></span><br><span class="line"><span class="comment"># 需要在公众帐号管理台手动提交, 验证后方可接收微信服务器的消息推送</span></span><br><span class="line"><span class="meta">@app.route('/weixin', methods=['GET'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">weixin_access_verify</span><span class="params">()</span>:</span></span><br><span class="line">    echostr = request.args.get(<span class="string">'echostr'</span>)</span><br><span class="line">    <span class="keyword">if</span> verification(request) <span class="keyword">and</span> echostr <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">return</span> echostr</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'access verification fail'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 接入和消息推送都需要做校验</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">verification</span><span class="params">(request)</span>:</span></span><br><span class="line">    signature = request.args.get(<span class="string">'signature'</span>)</span><br><span class="line">    timestamp = request.args.get(<span class="string">'timestamp'</span>)</span><br><span class="line">    nonce = request.args.get(<span class="string">'nonce'</span>)</span><br><span class="line"></span><br><span class="line">    token = <span class="string">'xxxxxx'</span> <span class="comment">#注意要与微信公众帐号平台上填写一致</span></span><br><span class="line">    tmplist = [token, timestamp, nonce]</span><br><span class="line">    tmplist.sort()</span><br><span class="line">    tmpstr = <span class="string">''</span>.join(tmplist)</span><br><span class="line">    hashstr = hashlib.sha1(tmpstr).hexdigest()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> hashstr == signature:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure></p>
+<p>上传SAE云，</p>
+<h5 id="微信接口配置"><a href="#微信接口配置" class="headerlink" title="微信接口配置"></a>微信接口配置</h5><p>登录公众平台，点击高级功能。将会看到需要提供一个接入信息:<br><img src="http://7xroxn.com1.z0.glb.clouddn.com/weixintoken.jpg" alt=""><br>接口配置信息:URL为我们与微信交互的地址，Token相当于我们和微信之间约定的密码。<br>输入URL，Token点击提交，验证通过后方可接收微信服务器的消息推送。</p>
 
       
     </div>
@@ -315,13 +325,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2016/05/25/vertical-projection-for-python-opencv/">vertical projection for python-opencv</a></p>
+        <p><span>本文标题:</span><a href="/2016/07/18/Python开发微信点餐系统（一）/">Python开发微信点餐系统（一）</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Zack</a></p>
-        <p><span>发布时间:</span>2016-05-25, 21:59:01</p>
-        <p><span>最后更新:</span>2016-06-27, 13:00:36</p>
+        <p><span>发布时间:</span>2016-07-18, 23:18:36</p>
+        <p><span>最后更新:</span>2016-07-18, 23:19:53</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2016/05/25/vertical-projection-for-python-opencv/" title="vertical projection for python-opencv">http://hyzhangyong.github.io/2016/05/25/vertical-projection-for-python-opencv/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://hyzhangyong.github.io/2016/05/25/vertical-projection-for-python-opencv/　　作者: Zack" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2016/07/18/Python开发微信点餐系统（一）/" title="Python开发微信点餐系统（一）">http://hyzhangyong.github.io/2016/07/18/Python开发微信点餐系统（一）/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://hyzhangyong.github.io/2016/07/18/Python开发微信点餐系统（一）/　　作者: Zack" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -333,16 +343,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2016/06/16/Python一些技巧/">
-                    Python一些技巧
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/2016/04/28/amf-for-python/">
-                    amf for python
+                <a href="/2016/06/23/Python实现车牌定位及分割/">
+                    Python实现车牌定位及分割
                 </a>
             </div>
         
@@ -353,7 +357,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于垂直投影法的python-opncv的实现方式"><span class="toc-number">1.</span> <span class="toc-text">关于垂直投影法的python,opncv的实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关于垂直投影的具体介绍，就不多说，直接上代码"><span class="toc-number">1.0.1.</span> <span class="toc-text">关于垂直投影的具体介绍，就不多说，直接上代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#另外把水平投影也一起写了"><span class="toc-number">1.0.2.</span> <span class="toc-text">另外把水平投影也一起写了</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#微信点餐平台开发-（一）"><span class="toc-number">1.</span> <span class="toc-text">微信点餐平台开发 （一）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#功能介绍"><span class="toc-number">1.0.1.</span> <span class="toc-text">功能介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#微信平台接口"><span class="toc-number">1.0.2.</span> <span class="toc-text">微信平台接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#功能实现"><span class="toc-number">1.0.3.</span> <span class="toc-text">功能实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#首先在微信的公众平台与新浪SAE平台上注册账户。"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">首先在微信的公众平台与新浪SAE平台上注册账户。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#在SAE上搭建Python应用"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">在SAE上搭建Python应用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#配置SAE与微信公众平台互通"><span class="toc-number">1.0.3.3.</span> <span class="toc-text">配置SAE与微信公众平台互通</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#微信接口配置"><span class="toc-number">1.0.3.4.</span> <span class="toc-text">微信接口配置</span></a></li></ol></li></ol></li></ol></li></ol>
 </div>
 <style>
     .left-col .switch-btn,
@@ -384,7 +388,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"vertical projection for python-opencv　| Zack's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Python开发微信点餐系统（一）　| Zack's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -400,7 +404,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="2016/05/25/vertical-projection-for-python-opencv/" data-title="vertical projection for python-opencv" data-url="http://hyzhangyong.github.io/2016/05/25/vertical-projection-for-python-opencv/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/07/18/Python开发微信点餐系统（一）/" data-title="Python开发微信点餐系统（一）" data-url="http://hyzhangyong.github.io/2016/07/18/Python开发微信点餐系统（一）/"></div>
     <script>
         var duoshuoQuery = {short_name:"hyzhangyong"};
         var loadComment = function(){
@@ -423,15 +427,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/06/16/Python一些技巧/" title="上一篇: Python一些技巧">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/2016/04/28/amf-for-python/" title="下一篇: amf for python">
+            <a href="/2016/06/23/Python实现车牌定位及分割/" title="下一篇: Python实现车牌定位及分割">
                 <i class="fa fa-angle-right"></i>
             </a>
         

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hyzhangyong.github.io/"/>
-  <updated>2016-06-23T16:58:16.977Z</updated>
+  <updated>2016-07-18T15:19:53.133Z</updated>
   <id>http://hyzhangyong.github.io/</id>
   
   <author>
@@ -14,6 +14,40 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python开发微信点餐系统（一）</title>
+    <link href="http://hyzhangyong.github.io/2016/07/18/Python%E5%BC%80%E5%8F%91%E5%BE%AE%E4%BF%A1%E7%82%B9%E9%A4%90%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://hyzhangyong.github.io/2016/07/18/Python开发微信点餐系统（一）/</id>
+    <published>2016-07-18T15:18:36.000Z</published>
+    <updated>2016-07-18T15:19:53.133Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;微信点餐平台开发-（一）&quot;&gt;&lt;a href=&quot;#微信点餐平台开发-（一）&quot; class=&quot;headerlink&quot; title=&quot;微信点餐平台开发 （一）&quot;&gt;&lt;/a&gt;微信点餐平台开发 （一）&lt;/h2&gt;&lt;p&gt;接下来我们将一步一步学习Flask+微信公众平台+新浪SAE平台开发一个点餐平台。&lt;/p&gt;
+&lt;h4 id=&quot;功能介绍&quot;&gt;&lt;a href=&quot;#功能介绍&quot; class=&quot;headerlink&quot; title=&quot;功能介绍&quot;&gt;&lt;/a&gt;功能介绍&lt;/h4&gt;&lt;p&gt;此点餐平台有以下功能:&lt;br&gt;1、预约管理&lt;br&gt;2、菜单管理&lt;br&gt;3、线路导航&lt;/p&gt;
+&lt;h4 id=&quot;微信平台接口&quot;&gt;&lt;a href=&quot;#微信平台接口&quot; class=&quot;headerlink&quot; title=&quot;微信平台接口&quot;&gt;&lt;/a&gt;微信平台接口&lt;/h4&gt;&lt;p&gt;主要用到微信公众平台的以下接口:&lt;br&gt;1、信息接口，用来输出用户服务信息&lt;br&gt;2、地理位置信息服务&lt;br&gt;3、自定义菜单&lt;br&gt;4、事件推送&lt;/p&gt;
+&lt;h4 id=&quot;功能实现&quot;&gt;&lt;a href=&quot;#功能实现&quot; class=&quot;headerlink&quot; title=&quot;功能实现&quot;&gt;&lt;/a&gt;功能实现&lt;/h4&gt;&lt;h5 id=&quot;首先在微信的公众平台与新浪SAE平台上注册账户。&quot;&gt;&lt;a href=&quot;#首先在微信的公众平台与新浪SAE平台上注册账户。&quot; class=&quot;headerlink&quot; title=&quot;首先在微信的公众平台与新浪SAE平台上注册账户。&quot;&gt;&lt;/a&gt;首先在微信的公众平台与新浪SAE平台上注册账户。&lt;/h5&gt;&lt;p&gt;此处不作详细介绍&lt;/p&gt;
+&lt;h5 id=&quot;在SAE上搭建Python应用&quot;&gt;&lt;a href=&quot;#在SAE上搭建Python应用&quot; class=&quot;headerlink&quot; title=&quot;在SAE上搭建Python应用&quot;&gt;&lt;/a&gt;在SAE上搭建Python应用&lt;/h5&gt;&lt;p&gt;在新浪云中选择云应用SAE，创建新应用。为了方便开发调试，我们需要安装SAE本地开发环境。&lt;br&gt;1、安装&lt;br&gt;直接使用pip或者easy_install安装sae-python-dev即可&lt;br&gt;2、基本使用&lt;br&gt;进入应用的本地开发目录，也就是index.wsgi和config.yaml所在的目录。运行&lt;code&gt;dev_server.py&lt;/code&gt;命令启动测试server&lt;br&gt;3、使用MySQL服务&lt;br&gt;首先配置好MySQL本地开发server。然后使用-mysql参数运行dev_server.py&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;dev_server.py --mysql=user:password@host:port&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h5 id=&quot;配置SAE与微信公众平台互通&quot;&gt;&lt;a href=&quot;#配置SAE与微信公众平台互通&quot; class=&quot;headerlink&quot; title=&quot;配置SAE与微信公众平台互通&quot;&gt;&lt;/a&gt;配置SAE与微信公众平台互通&lt;/h5&gt;&lt;p&gt;公众号消息服务器网址接入验证，在开发目录下新建myapp.py&lt;br&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;from&lt;/span&gt; flask &lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; Flask, request&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 公众号消息服务器网址接入验证&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 需要在公众帐号管理台手动提交, 验证后方可接收微信服务器的消息推送&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@app.route(&#39;/weixin&#39;, methods=[&#39;GET&#39;])&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;weixin_access_verify&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    echostr = request.args.get(&lt;span class=&quot;string&quot;&gt;&#39;echostr&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; verification(request) &lt;span class=&quot;keyword&quot;&gt;and&lt;/span&gt; echostr &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;None&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; echostr&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;access verification fail&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;# 接入和消息推送都需要做校验&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;verification&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(request)&lt;/span&gt;:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    signature = request.args.get(&lt;span class=&quot;string&quot;&gt;&#39;signature&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    timestamp = request.args.get(&lt;span class=&quot;string&quot;&gt;&#39;timestamp&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    nonce = request.args.get(&lt;span class=&quot;string&quot;&gt;&#39;nonce&#39;&lt;/span&gt;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    token = &lt;span class=&quot;string&quot;&gt;&#39;xxxxxx&#39;&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;#注意要与微信公众帐号平台上填写一致&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    tmplist = [token, timestamp, nonce]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    tmplist.sort()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    tmpstr = &lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt;.join(tmplist)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    hashstr = hashlib.sha1(tmpstr).hexdigest()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; hashstr == signature:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;True&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;False&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; __name__ == &lt;span class=&quot;string&quot;&gt;&#39;__main__&#39;&lt;/span&gt;:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    app.run()&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;上传SAE云，&lt;/p&gt;
+&lt;h5 id=&quot;微信接口配置&quot;&gt;&lt;a href=&quot;#微信接口配置&quot; class=&quot;headerlink&quot; title=&quot;微信接口配置&quot;&gt;&lt;/a&gt;微信接口配置&lt;/h5&gt;&lt;p&gt;登录公众平台，点击高级功能。将会看到需要提供一个接入信息:&lt;br&gt;&lt;img src=&quot;http://7xroxn.com1.z0.glb.clouddn.com/weixintoken.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;接口配置信息:URL为我们与微信交互的地址，Token相当于我们和微信之间约定的密码。&lt;br&gt;输入URL，Token点击提交，验证通过后方可接收微信服务器的消息推送。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;微信点餐平台开发-（一）&quot;&gt;&lt;a href=&quot;#微信点餐平台开发-（一）&quot; class=&quot;headerlink&quot; title=&quot;微信点餐平台开发 （一）&quot;&gt;&lt;/a&gt;微信点餐平台开发 （一）&lt;/h2&gt;&lt;p&gt;接下来我们将一步一步学习Flask+微信公众平台+新浪SAE
+    
+    </summary>
+    
+    
+      <category term="python" scheme="http://hyzhangyong.github.io/tags/python/"/>
+    
+      <category term="flask" scheme="http://hyzhangyong.github.io/tags/flask/"/>
+    
+      <category term="sae" scheme="http://hyzhangyong.github.io/tags/sae/"/>
+    
+      <category term="微信公众平台" scheme="http://hyzhangyong.github.io/tags/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%B9%B3%E5%8F%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>Python实现车牌定位及分割</title>
@@ -48,9 +82,9 @@
       <category term="opencv" scheme="http://hyzhangyong.github.io/categories/opencv/"/>
     
     
-      <category term="python" scheme="http://hyzhangyong.github.io/tags/python/"/>
-    
       <category term="opencv" scheme="http://hyzhangyong.github.io/tags/opencv/"/>
+    
+      <category term="python" scheme="http://hyzhangyong.github.io/tags/python/"/>
     
   </entry>
   
@@ -239,9 +273,9 @@
       <category term="opencv" scheme="http://hyzhangyong.github.io/categories/opencv/"/>
     
     
-      <category term="python" scheme="http://hyzhangyong.github.io/tags/python/"/>
-    
       <category term="opencv" scheme="http://hyzhangyong.github.io/tags/opencv/"/>
+    
+      <category term="python" scheme="http://hyzhangyong.github.io/tags/python/"/>
     
       <category term="vertical" scheme="http://hyzhangyong.github.io/tags/vertical/"/>
     
