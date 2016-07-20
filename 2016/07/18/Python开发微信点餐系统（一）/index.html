@@ -30,7 +30,7 @@
 功能实现首先在微信的公众平台与新浪SAE平台上注册账户。此处不作详细介绍
 在SAE上搭建Pytho">
 <meta property="og:image" content="http://7xroxn.com1.z0.glb.clouddn.com/weixintoken.jpg">
-<meta property="og:updated_time" content="2016-07-18T15:29:21.715Z">
+<meta property="og:updated_time" content="2016-07-20T10:26:25.973Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python开发微信点餐系统（一）">
 <meta name="twitter:description" content="微信点餐平台开发 （一）接下来我们将一步一步学习Flask+微信公众平台+新浪SAE平台开发一个点餐平台。
@@ -317,6 +317,8 @@
 <h6 id="配置SAE与微信公众平台互通"><a href="#配置SAE与微信公众平台互通" class="headerlink" title="配置SAE与微信公众平台互通"></a>配置SAE与微信公众平台互通</h6><p>公众号消息服务器网址接入验证，在开发目录下新建myapp.py<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request</span><br><span class="line"></span><br><span class="line"><span class="comment"># 公众号消息服务器网址接入验证</span></span><br><span class="line"><span class="comment"># 需要在公众帐号管理台手动提交, 验证后方可接收微信服务器的消息推送</span></span><br><span class="line"><span class="meta">@app.route('/weixin', methods=['GET'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">weixin_access_verify</span><span class="params">()</span>:</span></span><br><span class="line">    echostr = request.args.get(<span class="string">'echostr'</span>)</span><br><span class="line">    <span class="keyword">if</span> verification(request) <span class="keyword">and</span> echostr <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">return</span> echostr</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'access verification fail'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 接入和消息推送都需要做校验</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">verification</span><span class="params">(request)</span>:</span></span><br><span class="line">    signature = request.args.get(<span class="string">'signature'</span>)</span><br><span class="line">    timestamp = request.args.get(<span class="string">'timestamp'</span>)</span><br><span class="line">    nonce = request.args.get(<span class="string">'nonce'</span>)</span><br><span class="line"></span><br><span class="line">    token = <span class="string">'xxxxxx'</span> <span class="comment">#注意要与微信公众帐号平台上填写一致</span></span><br><span class="line">    tmplist = [token, timestamp, nonce]</span><br><span class="line">    tmplist.sort()</span><br><span class="line">    tmpstr = <span class="string">''</span>.join(tmplist)</span><br><span class="line">    hashstr = hashlib.sha1(tmpstr).hexdigest()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> hashstr == signature:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure></p>
 <p>上传SAE云，</p>
 <h6 id="微信接口配置"><a href="#微信接口配置" class="headerlink" title="微信接口配置"></a>微信接口配置</h6><p>登录公众平台，点击高级功能。将会看到需要提供一个接入信息:<br><img src="http://7xroxn.com1.z0.glb.clouddn.com/weixintoken.jpg" alt=""><br>接口配置信息:URL为我们与微信交互的地址，Token相当于我们和微信之间约定的密码。<br>输入URL，Token点击提交，验证通过后方可接收微信服务器的消息推送。</p>
+<hr>
+<p>各位如需要SAE云，可以使用我的邀请链接申请。各得100云豆，谢谢！<br>注册地址：<a href="http://t.cn/R4jxHGe" target="_blank" rel="external">http://t.cn/R4jxHGe</a></p>
 
       
     </div>
@@ -328,7 +330,7 @@
         <p><span>本文标题:</span><a href="/2016/07/18/Python开发微信点餐系统（一）/">Python开发微信点餐系统（一）</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Zack</a></p>
         <p><span>发布时间:</span>2016-07-18, 23:18:36</p>
-        <p><span>最后更新:</span>2016-07-18, 23:29:21</p>
+        <p><span>最后更新:</span>2016-07-20, 18:26:25</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/07/18/Python开发微信点餐系统（一）/" title="Python开发微信点餐系统（一）">http://hyzhangyong.github.io/2016/07/18/Python开发微信点餐系统（一）/</a>
             <span class="copy-path" data-clipboard-text="原文: http://hyzhangyong.github.io/2016/07/18/Python开发微信点餐系统（一）/　　作者: Zack" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -342,6 +344,12 @@
 
 
     <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/07/20/Python开发微信点餐系统（二）/">
+                    Python开发微信点餐系统（二）
+                </a>
+            </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
@@ -427,7 +435,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2016/07/20/Python开发微信点餐系统（二）/" title="上一篇: Python开发微信点餐系统（二）">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
@@ -439,7 +449,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/18/Python开发微信点餐系统（一）/">Python开发微信点餐系统（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/Python实现车牌定位及分割/">Python实现车牌定位及分割</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/22/一步一步学Scrapy-setp-3/">一步一步学Scrapy:setp 3</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/19/一步一步学Scrapy-setp-2/">一步一步学Scrapy:setp 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/17/一步一步学Scrapy-step-1/">一步一步学Scrapy:step 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/16/Python一些技巧/">Python一些技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/vertical-projection-for-python-opencv/">vertical projection for python-opencv</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/28/amf-for-python/">amf for python</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/17/python线程池控制/">python线程池控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/飞入购物车特效/">jQuery购物车特效</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/09/Ubuntu下安装Hexo与搭建Blog/">Ubuntu下安装Hexo与搭建Blog</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/20/Python开发微信点餐系统（二）/">Python开发微信点餐系统（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/18/Python开发微信点餐系统（一）/">Python开发微信点餐系统（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/Python实现车牌定位及分割/">Python实现车牌定位及分割</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/22/一步一步学Scrapy-setp-3/">一步一步学Scrapy:setp 3</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/19/一步一步学Scrapy-setp-2/">一步一步学Scrapy:setp 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/17/一步一步学Scrapy-step-1/">一步一步学Scrapy:step 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/16/Python一些技巧/">Python一些技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/vertical-projection-for-python-opencv/">vertical projection for python-opencv</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/28/amf-for-python/">amf for python</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/17/python线程池控制/">python线程池控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/飞入购物车特效/">jQuery购物车特效</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/09/Ubuntu下安装Hexo与搭建Blog/">Ubuntu下安装Hexo与搭建Blog</a></li></ul>
 
 
 

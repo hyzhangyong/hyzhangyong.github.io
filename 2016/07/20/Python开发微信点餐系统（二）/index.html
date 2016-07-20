@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Zack" />
+
+
+
+<meta name="description" content="微信点餐平台开发（二）上一篇我们完成了微信公众平台与SAE的联通，接下来我们实现关注提示及自定义菜单。
+关注公众号自动发送信息给客户端用户与公众号之间的信息交互类型分为文本、图片、语音、视频、小视频、地理位置、链接等，关注后自动推送欢迎信息，用到了文本信息。文本信息XML格式如下12345678&amp;lt;xml&amp;gt;&amp;lt;ToUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python开发微信点餐系统（二）">
+<meta property="og:url" content="http://hyzhangyong.github.io/2016/07/20/Python开发微信点餐系统（二）/index.html">
+<meta property="og:site_name" content="Zack's Blog">
+<meta property="og:description" content="微信点餐平台开发（二）上一篇我们完成了微信公众平台与SAE的联通，接下来我们实现关注提示及自定义菜单。
+关注公众号自动发送信息给客户端用户与公众号之间的信息交互类型分为文本、图片、语音、视频、小视频、地理位置、链接等，关注后自动推送欢迎信息，用到了文本信息。文本信息XML格式如下12345678&amp;lt;xml&amp;gt;&amp;lt;ToUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt">
+<meta property="og:updated_time" content="2016-07-20T10:40:01.678Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python开发微信点餐系统（二）">
+<meta name="twitter:description" content="微信点餐平台开发（二）上一篇我们完成了微信公众平台与SAE的联通，接下来我们实现关注提示及自定义菜单。
+关注公众号自动发送信息给客户端用户与公众号之间的信息交互类型分为文本、图片、语音、视频、小视频、地理位置、链接等，关注后自动推送欢迎信息，用到了文本信息。文本信息XML格式如下12345678&amp;lt;xml&amp;gt;&amp;lt;ToUserName&amp;gt;&amp;lt;![CDATA[%s]]&amp;gt;&amp;lt">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternative" href="/atom.xml" title="Zack&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Python开发微信点餐系统（二） | Zack&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        open_in_new: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://7xroxn.com1.z0.glb.clouddn.com/1.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Zack</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:hyzhangyong@yeah.net" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/hyzhangyong" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/amf/">amf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flask/">flask</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/projection/">projection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sae/">sae</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scarpy/">scarpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scrapy/">scrapy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/threading/">threading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vertical/">vertical</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分页爬取/">分页爬取</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信公众平台/">微信公众平台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技巧/">技巧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线程池/">线程池</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/购物车/">购物车</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">一个迷路的雄鹰，努力想找回自我。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Zack</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://7xroxn.com1.z0.glb.clouddn.com/1.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Zack</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:hyzhangyong@yeah.net" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/hyzhangyong" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Python开发微信点餐系统（二）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/20/Python开发微信点餐系统（二）/" class="article-date">
+      <time datetime="2016-07-20T10:37:24.000Z" itemprop="datePublished">2016-07-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python开发微信点餐系统（二）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flask/">flask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sae/">sae</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信公众平台/">微信公众平台</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="微信点餐平台开发（二）"><a href="#微信点餐平台开发（二）" class="headerlink" title="微信点餐平台开发（二）"></a>微信点餐平台开发（二）</h2><p>上一篇我们完成了微信公众平台与SAE的联通，接下来我们实现关注提示及自定义菜单。</p>
+<h4 id="关注公众号自动发送信息给客户端"><a href="#关注公众号自动发送信息给客户端" class="headerlink" title="关注公众号自动发送信息给客户端"></a>关注公众号自动发送信息给客户端</h4><p>用户与公众号之间的信息交互类型分为文本、图片、语音、视频、小视频、地理位置、链接等，关注后自动推送欢迎信息，用到了文本信息。<br>文本信息XML格式如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xml</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ToUserName</span>&gt;</span>&lt;![CDATA[%s]]&gt;<span class="tag">&lt;/<span class="name">ToUserName</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">FromUserName</span>&gt;</span>&lt;![CDATA[%s]]&gt;<span class="tag">&lt;/<span class="name">FromUserName</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">CreateTime</span>&gt;</span>%s<span class="tag">&lt;/<span class="name">CreateTime</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">MsgType</span>&gt;</span>&lt;![CDATA[text]]&gt;<span class="tag">&lt;/<span class="name">MsgType</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Content</span>&gt;</span>&lt;![CDATA[%s]]&gt;<span class="tag">&lt;/<span class="name">Content</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">FuncFlag</span>&gt;</span>0<span class="tag">&lt;/<span class="name">FuncFlag</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">xml</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>具体参数详解参照微信公众号开发手册<br>代码实现:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request</span><br><span class="line"></span><br><span class="line">TEXT_MSG_TPL = \</span><br><span class="line"><span class="string">u"""</span><br><span class="line">&lt;xml&gt;</span><br><span class="line">&lt;ToUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/ToUserName&gt;</span><br><span class="line">&lt;FromUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/FromUserName&gt;</span><br><span class="line">&lt;CreateTime&gt;%s&lt;/CreateTime&gt;</span><br><span class="line">&lt;MsgType&gt;&lt;![CDATA[text]]&gt;&lt;/MsgType&gt;</span><br><span class="line">&lt;Content&gt;&lt;![CDATA[%s]]&gt;&lt;/Content&gt;</span><br><span class="line">&lt;FuncFlag&gt;0&lt;/FuncFlag&gt;</span><br><span class="line">&lt;/xml&gt;</span><br><span class="line">"""</span></span><br><span class="line"></span><br><span class="line">WELCOME_INFO = \</span><br><span class="line"><span class="string">u"""</span><br><span class="line">欢迎关注微信餐厅微信点餐</span><br><span class="line">"""</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#来自微信服务器的消息推送</span></span><br><span class="line"><span class="meta">@app.route('/weixin', methods=['POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">weixin_msg</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> verification(request):</span><br><span class="line">        data = request.data</span><br><span class="line">        msg = parse_msg(data)</span><br><span class="line">        <span class="comment"># 用户关注微信公众号时自动发送欢迎信息到用户端</span></span><br><span class="line">        <span class="keyword">if</span> user_subscribe_event(msg):</span><br><span class="line">            <span class="keyword">return</span> welcome_info(msg)</span><br><span class="line">        <span class="comment"># 用户发送?到公众号时自动回复欢迎信息</span></span><br><span class="line">        <span class="keyword">elif</span> is_text_msg(msg):</span><br><span class="line">            content = msg[<span class="string">'Content'</span>]</span><br><span class="line">            <span class="keyword">if</span> content == <span class="string">u'?'</span> <span class="keyword">or</span> content == <span class="string">u'？'</span>:</span><br><span class="line">                <span class="keyword">return</span> welcome_info(msg)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将消息解析为dict</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_msg</span><span class="params">(rawmsgstr)</span>:</span></span><br><span class="line">    root = ET.fromstring(rawmsgstr)</span><br><span class="line">    msg = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> child <span class="keyword">in</span> root:</span><br><span class="line">        msg[child.tag] = child.text</span><br><span class="line">    <span class="keyword">return</span> msg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 判断用户信息类型是否为文本信息</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_text_msg</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> msg[<span class="string">'MsgType'</span>] == <span class="string">'text'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 判断是否为关注事件</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">user_subscribe_event</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> msg[<span class="string">'MsgType'</span>] == <span class="string">'event'</span> <span class="keyword">and</span> msg[<span class="string">'Event'</span>] == <span class="string">'subscribe'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回欢迎信息值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">welcome_info</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> response_text_msg(msg, WELCOME_INFO)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给定一个信息模板，返回对应对应值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">response_text_msg</span><span class="params">(msg, content)</span>:</span></span><br><span class="line">    s = TEXT_MSG_TPL % (msg[<span class="string">'FromUserName'</span>], msg[<span class="string">'ToUserName'</span>], str(int(time.time())), content)</span><br><span class="line">    <span class="keyword">return</span> s</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h4 id="自定义菜单"><a href="#自定义菜单" class="headerlink" title="自定义菜单"></a>自定义菜单</h4><p>这里我们分三个一级菜单，二个二级菜单。<br>首先获得AppId和AppSecert,在微信公众平台开发者中心可以找到。<br>代码实现如下:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">appid=<span class="string">'xxxxxxx'</span></span><br><span class="line">secret=<span class="string">'xxxxxx'</span></span><br><span class="line"><span class="comment"># 获得Access Token</span></span><br><span class="line">gettoken=<span class="string">'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&amp;appid='</span>+appid+<span class="string">'&amp;secret='</span>+secret</span><br><span class="line"></span><br><span class="line">f=urllib2.urlopen(gettoken)</span><br><span class="line"></span><br><span class="line">stringjson=f.read()</span><br><span class="line"></span><br><span class="line">access_token=json.loads(stringjson)[<span class="string">'access_token'</span>]</span><br><span class="line"></span><br><span class="line">posturl=<span class="string">'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='</span>+access_token</span><br><span class="line"></span><br><span class="line"><span class="comment"># 接口调用请求</span></span><br><span class="line">menu=<span class="string">'''&#123;</span><br><span class="line">    "button":[</span><br><span class="line">    &#123;</span><br><span class="line">    "type":"click",</span><br><span class="line">    "name":"预定",</span><br><span class="line">    "key":"CLICK_RESERVE"</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">    "type":"view",</span><br><span class="line">    "name":"点菜",</span><br><span class="line">    "url":"http://xxxx.sinaapp.com/menu"</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">    "name":"服务",</span><br><span class="line">    "sub_button":[</span><br><span class="line">        &#123;</span><br><span class="line">        "type":"click",</span><br><span class="line">        "name":"线路导航",</span><br><span class="line">        "key":"CLICK_ROUTE"</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">        "type":"view",</span><br><span class="line">        "name":"微信餐厅",</span><br><span class="line">        "url":"http://www.xxxx.com/about"</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">    &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">'''</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提交菜单内容给服务器</span></span><br><span class="line">request=urllib2.urlopen(posturl,menu.encode(<span class="string">'utf-8'</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看是否成功</span></span><br><span class="line"><span class="comment"># 正确时的返回JSON数据包:&#123;"errcode":0,"errmsg":"ok"&#125;</span></span><br><span class="line"><span class="comment"># 错误时的返回JSON数据包:&#123;"errcode":xxxx,"errmsg":"xxxx"&#125;</span></span><br><span class="line"><span class="keyword">print</span> request.read()</span><br></pre></td></tr></table></figure></p>
+<h6 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h6><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>是否必须</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>button</td>
+<td>是</td>
+<td>一级菜单数组，个数应为1-3个</td>
+</tr>
+<tr>
+<td>sub_button</td>
+<td>否</td>
+<td>二级菜单数组，个数1-5个</td>
+</tr>
+<tr>
+<td>type</td>
+<td>是</td>
+<td>菜单的响应动作类型，目前有click,view两种类型</td>
+</tr>
+<tr>
+<td>name</td>
+<td>是</td>
+<td>菜单标题，不超过16个字节，子菜单不超过40个字节</td>
+</tr>
+<tr>
+<td>key</td>
+<td>click类型必须</td>
+<td>菜单KEY值，用于信息接口推送，不超过128字节</td>
+</tr>
+<tr>
+<td>url</td>
+<td>view类型必须</td>
+<td>网页链接，用户点击菜单可打开链接，不超过256字节</td>
+</tr>
+</tbody>
+</table>
+<h4 id="响应菜单点击事件（一）"><a href="#响应菜单点击事件（一）" class="headerlink" title="响应菜单点击事件（一）"></a>响应菜单点击事件（一）</h4><p>在信息接口中处理event事件，其中的click代表菜单点击，通过响应菜单结构中的key值回应信息，view事件无须响应，将直接跳转过去。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 判断并处理click事件推送</span></span><br><span class="line"><span class="keyword">elif</span> user_click_event(msg):</span><br><span class="line">    <span class="keyword">if</span> msg[<span class="string">'EventKey'</span>]==<span class="string">'CLICK_RESERVE'</span>:</span><br><span class="line">        <span class="keyword">return</span> goreserve(msg)</span><br><span class="line">    <span class="keyword">if</span> msg[<span class="string">'EventKey'</span>]==<span class="string">'CLICK_ROUTE'</span>:</span><br><span class="line">        fromusername=msg[<span class="string">'FromUserName'</span>]</span><br><span class="line">        userLoc=model.get_user_location(fromusername)</span><br><span class="line">        <span class="keyword">if</span> userLoc:</span><br><span class="line">            <span class="keyword">return</span> goroute(msg)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> route_info(msg)</span><br></pre></td></tr></table></figure></p>
+<p>接下来一篇我们将详细实现点击事件功能。</p>
+<hr>
+<p>各位如需要SAE云，可以使用我的邀请链接申请。各得100云豆，谢谢！<br>注册地址：<a href="http://t.cn/R4jxHGe" target="_blank" rel="external">http://t.cn/R4jxHGe</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/07/20/Python开发微信点餐系统（二）/">Python开发微信点餐系统（二）</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Zack</a></p>
+        <p><span>发布时间:</span>2016-07-20, 18:37:24</p>
+        <p><span>最后更新:</span>2016-07-20, 18:40:01</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/07/20/Python开发微信点餐系统（二）/" title="Python开发微信点餐系统（二）">http://hyzhangyong.github.io/2016/07/20/Python开发微信点餐系统（二）/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://hyzhangyong.github.io/2016/07/20/Python开发微信点餐系统（二）/　　作者: Zack" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/07/18/Python开发微信点餐系统（一）/">
+                    Python开发微信点餐系统（一）
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#微信点餐平台开发（二）"><span class="toc-number">1.</span> <span class="toc-text">微信点餐平台开发（二）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关注公众号自动发送信息给客户端"><span class="toc-number">1.0.1.</span> <span class="toc-text">关注公众号自动发送信息给客户端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义菜单"><span class="toc-number">1.0.2.</span> <span class="toc-text">自定义菜单</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#参数说明"><span class="toc-number">1.0.2.0.1.</span> <span class="toc-text">参数说明</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#响应菜单点击事件（一）"><span class="toc-number">1.0.3.</span> <span class="toc-text">响应菜单点击事件（一）</span></a></li></ol></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script>
+    yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+</script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Python开发微信点餐系统（二）　| Zack's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/07/20/Python开发微信点餐系统（二）/" data-title="Python开发微信点餐系统（二）" data-url="http://hyzhangyong.github.io/2016/07/20/Python开发微信点餐系统（二）/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"hyzhangyong"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/07/18/Python开发微信点餐系统（一）/" title="下一篇: Python开发微信点餐系统（一）">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/20/Python开发微信点餐系统（二）/">Python开发微信点餐系统（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/18/Python开发微信点餐系统（一）/">Python开发微信点餐系统（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/Python实现车牌定位及分割/">Python实现车牌定位及分割</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/22/一步一步学Scrapy-setp-3/">一步一步学Scrapy:setp 3</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/19/一步一步学Scrapy-setp-2/">一步一步学Scrapy:setp 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/17/一步一步学Scrapy-step-1/">一步一步学Scrapy:step 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/16/Python一些技巧/">Python一些技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/vertical-projection-for-python-opencv/">vertical projection for python-opencv</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/28/amf-for-python/">amf for python</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/17/python线程池控制/">python线程池控制</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/11/飞入购物车特效/">jQuery购物车特效</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/09/Ubuntu下安装Hexo与搭建Blog/">Ubuntu下安装Hexo与搭建Blog</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Zack
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

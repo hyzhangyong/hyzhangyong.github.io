@@ -263,6 +263,70 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Python开发微信点餐系统（二）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/20/Python开发微信点餐系统（二）/" class="article-date">
+      <time datetime="2016-07-20T10:37:24.000Z" itemprop="datePublished">2016-07-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/20/Python开发微信点餐系统（二）/">Python开发微信点餐系统（二）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="微信点餐平台开发（二）"><a href="#微信点餐平台开发（二）" class="headerlink" title="微信点餐平台开发（二）"></a>微信点餐平台开发（二）</h2><p>上一篇我们完成了微信公众平台与SAE的联通，接下来我们实现关注提示及自定义菜单。</p>
+<h4 id="关注公众号自动发送信息给客户端"><a href="#关注公众号自动发送信息给客户端" class="headerlink" title="关注公众号自动发送信息给客户端"></a>关注公众号自动发送信息给客户端</h4><p>用户与公众号之间的信息交互类型分为文本、图片、语音、视频、小视频、地理位置、链接等，关注后自动推送欢迎信息，用到了文本信息。<br>文本信息XML格式如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">xml</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ToUserName</span>&gt;</span>&lt;![CDATA[%s]]&gt;<span class="tag">&lt;/<span class="name">ToUserName</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">FromUserName</span>&gt;</span>&lt;![CDATA[%s]]&gt;<span class="tag">&lt;/<span class="name">FromUserName</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">CreateTime</span>&gt;</span>%s<span class="tag">&lt;/<span class="name">CreateTime</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">MsgType</span>&gt;</span>&lt;![CDATA[text]]&gt;<span class="tag">&lt;/<span class="name">MsgType</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Content</span>&gt;</span>&lt;![CDATA[%s]]&gt;<span class="tag">&lt;/<span class="name">Content</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">FuncFlag</span>&gt;</span>0<span class="tag">&lt;/<span class="name">FuncFlag</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">xml</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>具体参数详解参照微信公众号开发手册<br>代码实现:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request</span><br><span class="line"></span><br><span class="line">TEXT_MSG_TPL = \</span><br><span class="line"><span class="string">u"""</span><br><span class="line">&lt;xml&gt;</span><br><span class="line">&lt;ToUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/ToUserName&gt;</span><br><span class="line">&lt;FromUserName&gt;&lt;![CDATA[%s]]&gt;&lt;/FromUserName&gt;</span><br><span class="line">&lt;CreateTime&gt;%s&lt;/CreateTime&gt;</span><br><span class="line">&lt;MsgType&gt;&lt;![CDATA[text]]&gt;&lt;/MsgType&gt;</span><br><span class="line">&lt;Content&gt;&lt;![CDATA[%s]]&gt;&lt;/Content&gt;</span><br><span class="line">&lt;FuncFlag&gt;0&lt;/FuncFlag&gt;</span><br><span class="line">&lt;/xml&gt;</span><br><span class="line">"""</span></span><br><span class="line"></span><br><span class="line">WELCOME_INFO = \</span><br><span class="line"><span class="string">u"""</span><br><span class="line">欢迎关注微信餐厅微信点餐</span><br><span class="line">"""</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#来自微信服务器的消息推送</span></span><br><span class="line"><span class="meta">@app.route('/weixin', methods=['POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">weixin_msg</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> verification(request):</span><br><span class="line">        data = request.data</span><br><span class="line">        msg = parse_msg(data)</span><br><span class="line">        <span class="comment"># 用户关注微信公众号时自动发送欢迎信息到用户端</span></span><br><span class="line">        <span class="keyword">if</span> user_subscribe_event(msg):</span><br><span class="line">            <span class="keyword">return</span> welcome_info(msg)</span><br><span class="line">        <span class="comment"># 用户发送?到公众号时自动回复欢迎信息</span></span><br><span class="line">        <span class="keyword">elif</span> is_text_msg(msg):</span><br><span class="line">            content = msg[<span class="string">'Content'</span>]</span><br><span class="line">            <span class="keyword">if</span> content == <span class="string">u'?'</span> <span class="keyword">or</span> content == <span class="string">u'？'</span>:</span><br><span class="line">                <span class="keyword">return</span> welcome_info(msg)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将消息解析为dict</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_msg</span><span class="params">(rawmsgstr)</span>:</span></span><br><span class="line">    root = ET.fromstring(rawmsgstr)</span><br><span class="line">    msg = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> child <span class="keyword">in</span> root:</span><br><span class="line">        msg[child.tag] = child.text</span><br><span class="line">    <span class="keyword">return</span> msg</span><br><span class="line"></span><br><span class="line"><span class="comment"># 判断用户信息类型是否为文本信息</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_text_msg</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> msg[<span class="string">'MsgType'</span>] == <span class="string">'text'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 判断是否为关注事件</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">user_subscribe_event</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> msg[<span class="string">'MsgType'</span>] == <span class="string">'event'</span> <span class="keyword">and</span> msg[<span class="string">'Event'</span>] == <span class="string">'subscribe'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回欢迎信息值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">welcome_info</span><span class="params">(msg)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> response_text_msg(msg, WELCOME_INFO)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给定一个信息模板，返回对应对应值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">response_text_msg</span><span class="params">(msg, content)</span>:</span></span><br><span class="line">    s = TEXT_MSG_TPL % (msg[<span class="string">'FromUserName'</span>], msg[<span class="string">'ToUserName'</span>], str(int(time.time())), content)</span><br><span class="line">    <span class="keyword">return</span> s</span><br></pre></td></tr></table></figure></p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flask/">flask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sae/">sae</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信公众平台/">微信公众平台</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2016/07/20/Python开发微信点餐系统（二）/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Python开发微信点餐系统（一）" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -310,7 +374,7 @@
 
       
         <p class="article-more-link">
-          <a href="/2016/07/18/Python开发微信点餐系统（一）/#more">阅读全文 >></a>
+          <a href="/2016/07/18/Python开发微信点餐系统（一）/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -376,7 +440,7 @@
 
       
         <p class="article-more-link">
-          <a href="/2016/06/23/Python实现车牌定位及分割/#more">阅读全文 >></a>
+          <a href="/2016/06/23/Python实现车牌定位及分割/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -443,7 +507,7 @@
 
       
         <p class="article-more-link">
-          <a href="/2016/06/22/一步一步学Scrapy-setp-3/#more">阅读全文 >></a>
+          <a href="/2016/06/22/一步一步学Scrapy-setp-3/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -511,74 +575,7 @@
 
       
         <p class="article-more-link">
-          <a href="/2016/06/19/一步一步学Scrapy-setp-2/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-一步一步学Scrapy-step-1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/06/17/一步一步学Scrapy-step-1/" class="article-date">
-      <time datetime="2016-06-17T13:21:45.000Z" itemprop="datePublished">2016-06-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/17/一步一步学Scrapy-step-1/">一步一步学Scrapy:step 1</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="Ubuntu下安装Scrapy"><a href="#Ubuntu下安装Scrapy" class="headerlink" title="Ubuntu下安装Scrapy"></a>Ubuntu下安装Scrapy</h2><p>1、首先需要安装如下软件<br><code>Python 2.7</code><br><code>lxml</code><br><code>OpenSSL</code><br><code>pip or easy_install</code></p>
-<p>2、安装必备软件<br><code>sudo apt-get install libevent-dev</code><br><code>sudo apt-get install python-dev</code><br><code>sudo apt-get install libxml2-dev</code><br><code>sudo apt-get install libxslt1-dev</code><br><code>sudo apt-get install python-setuptools</code><br>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/python/">python</a><a class="article-category-link" href="/categories/python/scrapy/">scrapy</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scrapy/">scrapy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2016/06/17/一步一步学Scrapy-step-1/#more">阅读全文 >></a>
+          <a href="/2016/06/19/一步一步学Scrapy-setp-2/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
